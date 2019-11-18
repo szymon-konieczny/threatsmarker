@@ -1,15 +1,17 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "target": "es6",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true
+    "module": "commonjs",
+    "outDir": "build",
+    "sourceMap": false,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true,
+    "noImplicitAny": false,
+    "esModuleInterop": true
   },
-  "exclude": ["node_modules"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.spec.ts"]
 }
