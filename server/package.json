@@ -1,6 +1,6 @@
 {
-  "name": "express-starter",
-  "version": "1.0.0",
+  "name": "server",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -15,15 +15,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/purbanski-deftcode/express-starter.git"
+    "url": "git+https://github.com/szymon-konieczny/threatsmarker.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/"
+    "url": "https://github.com/szymon-konieczny/threatsmarker/bugs"
   },
-  "homepage": "https://github.com/readme",
+  "homepage": "https://github.com/szymon-konieczny/threatsmarker/readme",
   "dependencies": {
     "express": "^4.17.1"
   },
