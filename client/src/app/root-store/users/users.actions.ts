@@ -20,10 +20,10 @@ export const addUser = createAction('[Users] Add User', props<{ payload: { user:
 export const addUserSucceeded = createAction('[Users] Add User Succeeded', props<{ payload: { user: User } }>());
 export const addUserFailed = createAction('[Users] Add User failed', props<{ payload: Error }>());
 
-export const updateUser = createAction('[Users] Update User', props<{ payload: { userId: string } }>());
+export const updateUser = createAction('[Users] Update User', props<{ payload: { user: User } }>());
 export const updateUserSucceeded = createAction('[Users] Update User Succeeded', props<{ payload: { user: User } }>());
 export const updateUserFailed = createAction('[Users] Update User failed', props<{ payload: Error }>());
 
 export const removeUser = createAction('[Users] Remove User', props<{ payload: { userId: string } }>());
-export const removeUserSucceeded = createAction('[Users] Remove User Succeeded', props<{ payload: { userId: string } }>());
+export const removeUserSucceeded = createAction('[Users] Remove User Succeeded', props<{ payload: { user: User } }>());
 export const removeUserFailed = createAction('[Users] Remove User failed', props<{ payload: Error }>());

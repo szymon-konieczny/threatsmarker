@@ -1,6 +1,6 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import { User } from 'src/app/shared/interfaces';
+import { User } from '../../shared/interfaces';
 
 export interface State extends EntityState<User> {
 	selectedUser: User;
