@@ -35,7 +35,7 @@ export const usersReducer = createReducer(
 	on(UsersActions.updateUserFailed, (state, { payload }) => ({ ...state, isLoading: false, error: payload.message })),
 
 	on(UsersActions.removeUser, state => ({ ...state, isLoading: true, error: null })),
-	on(UsersActions.removeUserSucceeded, (state, { payload }) => ({ ...adapter.removeOne(payload.userId, state), })),
+	on(UsersActions.removeUserSucceeded, (state, { payload }) => ({ ...adapter.removeOne(payload.user.id, state), })),
 	on(UsersActions.updateUserFailed, (state, { payload }) => ({ ...state, isLoading: false, error: payload.message })),
 );
 
