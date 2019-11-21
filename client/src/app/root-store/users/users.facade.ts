@@ -31,12 +31,12 @@ export class UsersFacade {
 		this.store.dispatch(fromUsers.UsersActions.loadUser({ payload: { userId } }));
 	}
 
-	public addUser(user: User) {
-		this.store.dispatch(fromUsers.UsersActions.addUser({ payload: { user } }));
+	public addUser(userConfig: User) {
+		this.store.dispatch(fromUsers.UsersActions.addUser({ payload: { userConfig } }));
 	}
 
-	public updateUser(user: User) {
-		this.store.dispatch(fromUsers.UsersActions.updateUser({ payload: { user } }));
+	public updateUser(userConfig: User) {
+		this.store.dispatch(fromUsers.UsersActions.updateUser({ payload: { userConfig } }));
 	}
 
 	public removeUser(userId: string) {

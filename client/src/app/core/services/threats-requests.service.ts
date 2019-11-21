@@ -29,12 +29,12 @@ export class ThreatsService {
 		return this.http.get<Threat>(`api/threats/${threatId}`);
 	}
 
-	public addThreat(threatData: Threat): Observable<Threat> {
-		return this.http.post<Threat>(`api/threats`, threatData);
+	public addThreat(threatConfig: Threat): Observable<Threat> {
+		return this.http.post<Threat>(`api/threats`, threatConfig);
 	}
 
-	public updateThreat(threatData: Threat): Observable<Threat> {
-		return this.http.put<Threat>(`api/threats/${threatData.id}`, threatData);
+	public updateThreat(threatConfig: Threat): Observable<Threat> {
+		return this.http.put<Threat>(`api/threats/${threatConfig.id}`, threatConfig);
 	}
 
 	public removeThreat(threatId: string): Observable<Threat> {

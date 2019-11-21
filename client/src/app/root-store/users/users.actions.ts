@@ -21,11 +21,11 @@ export const loadUser = createAction('[Users] Load User', props<{ payload: { use
 export const loadUserSucceeded = createAction('[Users] Load User Succeeded', props<{ payload: { user: User } }>());
 export const loadUserFailed = createAction('[Users] Load User Failed', props<{ payload: Error }>());
 
-export const addUser = createAction('[Users] Add User', props<{ payload: { user: User } }>());
+export const addUser = createAction('[Users] Add User', props<{ payload: { userConfig: User } }>());
 export const addUserSucceeded = createAction('[Users] Add User Succeeded', props<{ payload: { user: User } }>());
 export const addUserFailed = createAction('[Users] Add User Failed', props<{ payload: Error }>());
 
-export const updateUser = createAction('[Users] Update User', props<{ payload: { user: User } }>());
+export const updateUser = createAction('[Users] Update User', props<{ payload: { userConfig: User } }>());
 export const updateUserSucceeded = createAction('[Users] Update User Succeeded', props<{ payload: { user: User } }>());
 export const updateUserFailed = createAction('[Users] Update User Failed', props<{ payload: Error }>());
 

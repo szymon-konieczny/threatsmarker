@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
-import { User, PaginationConfig, FilterConfig } from '../../shared/interfaces';
+import { User, PaginationConfig, FiltersConfig } from '../../shared/interfaces';
 
 @Injectable({
 	providedIn: 'root'
@@ -20,8 +20,8 @@ export class UsersService {
 		return this.http.get<User[]>(`api/users?limit=${pageSize}&page=${pageNumber}`);
 	}
 
-	public getFilteredUsers(filtersConfig: FilterConfig): Observable<User[]> {
-		const filters = filtersConfig.filterValues.join(',');
+	public getFilteredUsers(filtersConfig: FiltersConfig): Observable<User[]> {
+		const filters = filtersConfig.filters.join(',');
 		return this.http.get<User[]>(`api/users?filters=${filters}`);
 	}
 

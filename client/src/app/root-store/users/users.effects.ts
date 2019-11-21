@@ -52,7 +52,7 @@ export class UsersEffects {
 	public addUser$ = createEffect(() => this.actions$.pipe(
 		ofType(UsersActions.addUser),
 		pluck('payload'),
-		mergeMap(data => this.usersService.addUser(data.user).pipe(
+		mergeMap(data => this.usersService.addUser(data.userConfig).pipe(
 			map(user => UsersActions.addUserSucceeded({ payload: { user } })),
 			catchError(error => of(UsersActions.addUserFailed(error))),
 		)),
@@ -61,7 +61,7 @@ export class UsersEffects {
 	public updateUser$ = createEffect(() => this.actions$.pipe(
 		ofType(UsersActions.updateUser),
 		pluck('payload'),
-		mergeMap(data => this.usersService.updateUser(data.user).pipe(
+		mergeMap(data => this.usersService.updateUser(data.userConfig).pipe(
 			map(user => UsersActions.updateUserSucceeded({ payload: { user } })),
 			catchError(error => of(UsersActions.updateUserFailed(error))),
 		)),
