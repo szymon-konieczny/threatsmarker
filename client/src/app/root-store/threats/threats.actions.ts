@@ -1,25 +1,36 @@
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
-export const loadAllThreads = createAction('[Threads] Load All Threads');
-export const loadAllThreadsSucceeded = createAction('[Threads] Load All Threads Succeeded');
-export const loadAllThreadsFailed = createAction('[Threads] Load All Threads Failed');
+import { Threat, PaginationConfig, FiltersConfig } from '../../shared/interfaces';
 
-export const loadPaginatedThreads = createAction('[Threads] Load Paginated Threads');
-export const loadPaginatedThreadsSucceeded = createAction('[Threads] Load Paginated Threads Succeeded');
-export const loadPaginatedThreadsFailed = createAction('[Threads] Load Paginated Threads Failed');
+export const loadAllThreats = createAction('[Threats] Load All Threats');
+export const loadAllThreatsSucceeded = createAction('[Threats] Load All Threats Succeeded', props<{ payload: { threats: Threat[] } }>());
+export const loadAllThreatsFailed = createAction('[Threats] Load All Threats Failed', props<{ payload: Error }>());
 
-export const loadFilteredThreads = createAction('[Threats] Load Filtered Threats');
-export const loadFilteredThreadsSucceeded = createAction('[Threats] Load Filtered Threats Succeeded');
-export const loadFilteredThreadsFailed = createAction('[Threats] Load Filtered Threats Failed');
+export const loadPaginatedThreats = createAction(
+	'[Threats] Load Paginated Threats',
+	props<{ payload: { paginationConfig: PaginationConfig } }>(),
+);
+export const loadPaginatedThreatsSucceeded = createAction(
+	'[Threats] Load Paginated Threats Succeeded',
+	props<{ payload: { threats: Threat[] } }>(),
+);
+export const loadPaginatedThreatsFailed = createAction('[Threats] Load Paginated Threats Failed', props<{ payload: Error }>());
 
-export const addThreat = createAction('[Threat] Add Threat');
-export const addThreatSucceeded = createAction('[Threat] Add Threat Succeeded');
-export const addThreatFailed = createAction('[Threat] Add Threat Failed');
+export const loadFilteredThreats = createAction('[Threats] Load Filtered Threats', props<{ payload: { filtersConfig: FiltersConfig } }>());
+export const loadFilteredThreatsSucceeded = createAction(
+	'[Threats] Load Filtered Threats Succeeded',
+	props<{ payload: { threats: Threat[] } }>(),
+);
+export const loadFilteredThreatsFailed = createAction('[Threats] Load Filtered Threats Failed', props<{ payload: Error }>());
 
-export const updateThreat = createAction('Threats] Update Threat');
-export const updateThreatSucceeded = createAction('Threats] Update Threat Succeeded');
-export const updateThreatFailed = createAction('Threats] Update Threat Failed');
+export const addThreat = createAction('[Threat] Add Threat', props<{ payload: { threatConfig: Threat } }>());
+export const addThreatSucceeded = createAction('[Threat] Add Threat Succeeded', props<{ payload: { threat: Threat } }>());
+export const addThreatFailed = createAction('[Threat] Add Threat Failed', props<{ payload: Error }>());
 
-export const removeThreat = createAction('[Threats] Remove Threat');
-export const removeThreatSucceeded = createAction('[Threats] Remove Threat Succeeded');
-export const removeThreatFailed = createAction('[Threats] Remove Threat Failed');
+export const updateThreat = createAction('Threats] Update Threat', props<{ payload: { threatConfig: Threat } }>());
+export const updateThreatSucceeded = createAction('Threats] Update Threat Succeeded', props<{ payload: { threat: Threat } }>());
+export const updateThreatFailed = createAction('Threats] Update Threat Failed', props<{ payload: Error }>());
+
+export const removeThreat = createAction('[Threats] Remove Threat', props<{ payload: { threatId: string } }>());
+export const removeThreatSucceeded = createAction('[Threats] Remove Threat Succeeded', props<{ payload: { threat: Threat } }>());
+export const removeThreatFailed = createAction('[Threats] Remove Threat Failed', props<{ payload: Error }>());

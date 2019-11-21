@@ -13,8 +13,8 @@ import { RootStoreModule } from './root-store/root-store.module';
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
-		CoreModule,
 		SharedModule,
+		CoreModule,
 		RootStoreModule,
 		BrowserAnimationsModule,
 	],

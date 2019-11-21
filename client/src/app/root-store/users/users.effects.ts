@@ -4,8 +4,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, switchMap, catchError, pluck, mergeMap } from 'rxjs/operators';
 
-import * as UsersActions from './users.actions';
 import { UsersService } from '../../core/services';
+import { UsersActions } from './';
 
 @Injectable()
 export class UsersEffects {
@@ -17,7 +17,7 @@ export class UsersEffects {
 	public loadAllUsers$ = createEffect(() => this.actions$.pipe(
 		ofType(UsersActions.loadAllUsers),
 		switchMap(() => this.usersService.getAllUsers().pipe(
-			map((users) => UsersActions.loadAllUsersSucceeded({ payload: { users } })),
+			map(users => UsersActions.loadAllUsersSucceeded({ payload: { users } })),
 			catchError(error => of(UsersActions.loadAllUsersFailed(error))),
 		)),
 	));
@@ -27,7 +27,16 @@ export class UsersEffects {
 		pluck('payload'),
 		switchMap(({ paginationConfig }) => this.usersService.getPaginatedUsers(paginationConfig).pipe(
 			map((users) => UsersActions.loadPaginatedUsersSucceeded({ payload: { users } })),
-			catchError(error => of(UsersActions.loadAllUsersFailed(error))),
+			catchError(error => of(UsersActions.loadPaginatedUsersFailed(error))),
+		)),
+	));
+
+	public loadFilteredUsers$ = createEffect(() => this.actions$.pipe(
+		ofType(UsersActions.loadFilteredUsers),
+		pluck('payload'),
+		switchMap(({ filtersConfig }) => this.usersService.getFilteredUsers(filtersConfig).pipe(
+			map((users) => UsersActions.loadFilteredUsersSucceeded({ payload: { users } })),
+			catchError(error => of(UsersActions.loadFilteredUsersFailed(error))),
 		)),
 	));
 
@@ -52,7 +61,7 @@ export class UsersEffects {
 	public updateUser$ = createEffect(() => this.actions$.pipe(
 		ofType(UsersActions.updateUser),
 		pluck('payload'),
-		switchMap(data => this.usersService.updateUser(data.user).pipe(
+		mergeMap(data => this.usersService.updateUser(data.user).pipe(
 			map(user => UsersActions.updateUserSucceeded({ payload: { user } })),
 			catchError(error => of(UsersActions.updateUserFailed(error))),
 		)),
@@ -61,7 +70,7 @@ export class UsersEffects {
 	public removeUser$ = createEffect(() => this.actions$.pipe(
 		ofType(UsersActions.removeUser),
 		pluck('payload'),
-		switchMap(data => this.usersService.removeUser(data.userId).pipe(
+		mergeMap(data => this.usersService.removeUser(data.userId).pipe(
 			map(user => UsersActions.removeUserSucceeded({ payload: { user } })),
 			catchError(error => of(UsersActions.removeUserFailed(error))),
 		)),

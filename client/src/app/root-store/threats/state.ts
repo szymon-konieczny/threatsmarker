@@ -18,4 +18,5 @@ export const defaultThreats: State = {
 
 export const adapter: EntityAdapter<Threat> = createEntityAdapter<Threat>();
 
-export const defaultState: State = adapter.getInitialState(defaultThreats);
+export const initialState: State = adapter.getInitialState(defaultThreats);
+

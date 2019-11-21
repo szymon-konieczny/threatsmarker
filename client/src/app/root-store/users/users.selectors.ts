@@ -1,0 +1,15 @@
+import { createSelector, createFeatureSelector, MemoizedSelector } from '@ngrx/store';
+
+import { State, adapter } from './state';
+
+export const getSelectedUserId = (state: State) => state.selectedUserId;
+export const getIsLoading = (state: State) => state.isLoading;
+export const getError = (state: State) => state.error;
+
+export const selectUsersStore: MemoizedSelector<object, State> = createFeatureSelector<State>('users');
+
+export const selectUsersError: MemoizedSelector<object, string> = createSelector(selectUsersStore, getError);
+export const selectUsersIsLoading: MemoizedSelector<object, boolean> = createSelector(selectUsersStore, getIsLoading);
+
+export const { selectAll } = adapter.getSelectors();
+export const selectAllUsers = createSelector(selectUsersStore, selectAll);
