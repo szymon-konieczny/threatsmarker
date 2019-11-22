@@ -1,2 +1,2 @@
-export * from './users-requests.service';
-export * from './threats-requests.service';
+export * from './users.http.service';
+export * from './threats.http.service';

@@ -1,34 +1,51 @@
 import { createAction, props } from '@ngrx/store';
 
-import { User, PaginationConfig, FiltersConfig } from '../../shared/interfaces';
+import { User, RequestConfig } from '../../shared/interfaces';
 
-export const loadAllUsers = createAction('[Users] Load All Users');
-export const loadAllUsersSucceeded = createAction('[Users] Load All Users Succeeded', props<{ payload: { users: User[] } }>());
-export const loadAllUsersFailed = createAction('[Users] Load All Users Failed', props<{ payload: Error }>());
+export enum ActionTypes {
+	LOAD_PAGINATED_USERS = '[Users] Load Paginated Users Succeeded',
+	LOAD_PAGINATED_USERS_SUCCEEDED = '[Users] Load Paginated Users Succeeded',
+	LOAD_PAGINATED_USERS_FAILED = '[Users] Load Paginated Users Succeeded',
+
+	LOAD_USER = '[Users] Load User',
+	LOAD_USER_SUCCEEDED = '[Users] Load User Succeeded',
+	LOAD_USER_FAILED = '[Users] Load User Failed',
+
+	ADD_USER = '[Users] Add User',
+	ADD_USER_SUCCEEDED = '[Users] Add User Succeeded',
+	ADD_USER_FAILED = '[Users] Add User Failed',
+
+	UPDATE_USER = '[Users] Update User',
+	UPDATE_USER_SUCCEEDED = '[Users] Update User Succeeded',
+	UPDATE_USER_FAILED = '[Users] Update User Failed',
+
+	REMOVE_USER = '[Users] Remove User',
+	REMOVE_USER_SUCCEEDED = '[Users] Remove User Succeeded',
+	REMOVE_USER_FAILED = '[Users] Remove User Failed',
+}
 
 export const loadPaginatedUsers = createAction(
-	'[Users] Load Paginated Users',
-	props<{ payload: { paginationConfig: PaginationConfig } }>(),
+	ActionTypes.LOAD_PAGINATED_USERS,
+	props<{ payload: { requestConfig: RequestConfig } }>(),
 );
-export const loadPaginatedUsersSucceeded = createAction('[Users] Load Paginated Users Succeeded', props<{ payload: { users: User[] } }>());
-export const loadPaginatedUsersFailed = createAction('[Users] Load Paginated Users Failed', props<{ payload: Error }>());
+export const loadPaginatedUsersSucceeded = createAction(
+	ActionTypes.LOAD_PAGINATED_USERS_SUCCEEDED,
+	props<{ payload: { users: User[] } }>(),
+);
+export const loadPaginatedUsersFailed = createAction(ActionTypes.LOAD_PAGINATED_USERS_FAILED, props<{ payload: Error }>());
 
-export const loadFilteredUsers = createAction('[Users] Load Filtered User', props<{ payload: { filtersConfig: FiltersConfig } }>());
-export const loadFilteredUsersSucceeded = createAction('[Users] Load Filtered User Succeeded', props<{ payload: { users: User[] } }>());
-export const loadFilteredUsersFailed = createAction('[Users] Load Filtered User Failed', props<{ payload: Error }>());
+export const loadUser = createAction(ActionTypes.LOAD_USER, props<{ payload: { userId: string } }>());
+export const loadUserSucceeded = createAction(ActionTypes.LOAD_USER_SUCCEEDED, props<{ payload: { user: User } }>());
+export const loadUserFailed = createAction(ActionTypes.LOAD_USER_FAILED, props<{ payload: Error }>());
 
-export const loadUser = createAction('[Users] Load User', props<{ payload: { userId: string } }>());
-export const loadUserSucceeded = createAction('[Users] Load User Succeeded', props<{ payload: { user: User } }>());
-export const loadUserFailed = createAction('[Users] Load User Failed', props<{ payload: Error }>());
+export const addUser = createAction(ActionTypes.ADD_USER, props<{ payload: { userConfig: User } }>());
+export const addUserSucceeded = createAction(ActionTypes.ADD_USER_SUCCEEDED, props<{ payload: { user: User } }>());
+export const addUserFailed = createAction(ActionTypes.ADD_USER_FAILED, props<{ payload: Error }>());
 
-export const addUser = createAction('[Users] Add User', props<{ payload: { userConfig: User } }>());
-export const addUserSucceeded = createAction('[Users] Add User Succeeded', props<{ payload: { user: User } }>());
-export const addUserFailed = createAction('[Users] Add User Failed', props<{ payload: Error }>());
+export const updateUser = createAction(ActionTypes.UPDATE_USER, props<{ payload: { userConfig: User } }>());
+export const updateUserSucceeded = createAction(ActionTypes.UPDATE_USER_SUCCEEDED, props<{ payload: { user: User } }>());
+export const updateUserFailed = createAction(ActionTypes.UPDATE_USER_FAILED, props<{ payload: Error }>());
 
-export const updateUser = createAction('[Users] Update User', props<{ payload: { userConfig: User } }>());
-export const updateUserSucceeded = createAction('[Users] Update User Succeeded', props<{ payload: { user: User } }>());
-export const updateUserFailed = createAction('[Users] Update User Failed', props<{ payload: Error }>());
-
-export const removeUser = createAction('[Users] Remove User', props<{ payload: { userId: string } }>());
-export const removeUserSucceeded = createAction('[Users] Remove User Succeeded', props<{ payload: { user: User } }>());
-export const removeUserFailed = createAction('[Users] Remove User Failed', props<{ payload: Error }>());
+export const removeUser = createAction(ActionTypes.REMOVE_USER, props<{ payload: { userId: string } }>());
+export const removeUserSucceeded = createAction(ActionTypes.REMOVE_USER_SUCCEEDED, props<{ payload: { user: User } }>());
+export const removeUserFailed = createAction(ActionTypes.REMOVE_USER_FAILED, props<{ payload: Error }>());

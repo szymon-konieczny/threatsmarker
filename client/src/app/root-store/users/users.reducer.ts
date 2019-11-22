@@ -5,13 +5,6 @@ import { UsersActions } from './';
 
 export const usersReducer = createReducer(
 	initialState,
-	// loadAllUsers
-	on(UsersActions.loadAllUsers, state => ({ ...state, isLoading: true, error: null })),
-	on(
-		UsersActions.loadAllUsersSucceeded,
-		(state, { payload }) => ({ ...adapter.addAll(payload.users, state), isLoading: false, error: null }),
-	),
-	on(UsersActions.loadAllUsersFailed, (state, { payload }) => ({ ...state, isLoading: false, error: payload.message })),
 	// loadPaginatedUsers
 	on(UsersActions.loadPaginatedUsers, state => ({ ...state, isLoading: true, error: null })),
 	on(
@@ -19,13 +12,6 @@ export const usersReducer = createReducer(
 		(state, { payload }) => ({ ...adapter.addAll(payload.users, state), isLoading: false, error: null }),
 	),
 	on(UsersActions.loadPaginatedUsersFailed, (state, { payload }) => ({ ...state, isLoading: false, error: payload.message })),
-	// loadFilteredUsers
-	on(UsersActions.loadFilteredUsers, state => ({ ...state, isLoading: true, error: null })),
-	on(
-		UsersActions.loadFilteredUsersSucceeded,
-		(state, { payload }) => ({ ...adapter.addAll(payload.users, state), isLoading: false, error: null }),
-	),
-	on(UsersActions.loadFilteredUsersFailed, (state, { payload }) => ({ ...state, isLoading: false, error: payload.message })),
 	// loadUser
 	on(UsersActions.loadUser, state => ({ ...state, isLoading: true, error: null })),
 	on(UsersActions.loadUserSucceeded, (state, { payload }) => ({ ...state, selectedUser: payload.user, isLoading: false, error: null })),

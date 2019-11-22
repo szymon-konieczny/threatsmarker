@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { State as UsersState } from './state';
 import * as fromUsers from './';
-import { User, PaginationConfig, FiltersConfig } from '../../shared/interfaces';
+import { User, RequestConfig } from '../../shared/interfaces';
 
 @Injectable()
 export class UsersFacade {
@@ -15,16 +15,8 @@ export class UsersFacade {
 
 	constructor(private store: Store<UsersState>) { }
 
-	public loadAllUsers() {
-		this.store.dispatch(fromUsers.UsersActions.loadAllUsers());
-	}
-
-	public loadPaginatedUsers(paginationConfig: PaginationConfig) {
-		this.store.dispatch(fromUsers.UsersActions.loadPaginatedUsers({ payload: { paginationConfig } }));
-	}
-
-	public loadFilteredUsers(filtersConfig: FiltersConfig) {
-		this.store.dispatch(fromUsers.UsersActions.loadFilteredUsers({ payload: { filtersConfig } }));
+	public loadPaginatedUsers(requestConfig: RequestConfig) {
+		this.store.dispatch(fromUsers.UsersActions.loadPaginatedUsers({ payload: { requestConfig } }));
 	}
 
 	public loadSingleUser(userId: string) {

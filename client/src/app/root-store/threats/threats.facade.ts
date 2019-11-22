@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { State as ThreatsState } from './state';
 import * as fromThreats from './';
-import { Threat, PaginationConfig, FiltersConfig } from '../../shared/interfaces';
+import { Threat, RequestConfig } from '../../shared/interfaces';
 
 @Injectable()
 export class ThreatsFacade {
@@ -15,16 +15,8 @@ export class ThreatsFacade {
 
 	constructor(private store: Store<ThreatsState>) { }
 
-	public loadAllThreats() {
-		this.store.dispatch(fromThreats.ThreatsActions.loadAllThreats());
-	}
-
-	public loadPaginatedThreats(paginationConfig: PaginationConfig) {
-		this.store.dispatch(fromThreats.ThreatsActions.loadPaginatedThreats({ payload: { paginationConfig } }));
-	}
-
-	public loadFilteredThreats(filtersConfig: FiltersConfig) {
-		this.store.dispatch(fromThreats.ThreatsActions.loadFilteredThreats({ payload: { filtersConfig } }));
+	public loadPaginatedThreats(requestConfig: RequestConfig) {
+		this.store.dispatch(fromThreats.ThreatsActions.loadPaginatedThreats({ payload: { requestConfig } }));
 	}
 
 	public addThreat(threatConfig: Threat) {
