@@ -5,13 +5,13 @@ import { ThreatsActions } from './';
 
 export const threatsReducer = createReducer(
 	initialState,
-	// loadPaginatedThreats
-	on(ThreatsActions.loadPaginatedThreats, state => ({ ...state, isLoading: true, error: null })),
+	// loadThreats
+	on(ThreatsActions.loadThreats, state => ({ ...state, isLoading: true, error: null })),
 	on(
-		ThreatsActions.loadPaginatedThreatsSucceeded,
-		(state, { payload }) => ({ ...adapter.addAll(payload.threats, state), isLoading: false, error: null }),
+		ThreatsActions.loadThreatsSucceeded,
+		(state, { payload }) => ({ ...adapter.addAll(payload.threats, state), count: payload.count || null, isLoading: false, error: null }),
 	),
-	on(ThreatsActions.loadPaginatedThreatsFailed, (state, { payload }) => ({ ...state, isLoading: false, error: payload.message })),
+	on(ThreatsActions.loadThreatsFailed, (state, { payload }) => ({ ...state, isLoading: false, error: payload.message })),
 	// addThreat
 	on(ThreatsActions.addThreat, state => ({ ...state, isLoading: true, error: null })),
 	on(ThreatsActions.addThreatSucceeded, (state, { payload }) =>

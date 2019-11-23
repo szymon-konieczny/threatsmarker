@@ -5,13 +5,13 @@ import { UsersActions } from './';
 
 export const usersReducer = createReducer(
 	initialState,
-	// loadPaginatedUsers
-	on(UsersActions.loadPaginatedUsers, state => ({ ...state, isLoading: true, error: null })),
+	// loadUsers
+	on(UsersActions.loadUsers, state => ({ ...state, isLoading: true, error: null })),
 	on(
-		UsersActions.loadPaginatedUsersSucceeded,
-		(state, { payload }) => ({ ...adapter.addAll(payload.users, state), isLoading: false, error: null }),
+		UsersActions.loadUsersSucceeded,
+		(state, { payload }) => ({ ...adapter.addAll(payload.users, state), count: payload.count || null, isLoading: false, error: null }),
 	),
-	on(UsersActions.loadPaginatedUsersFailed, (state, { payload }) => ({ ...state, isLoading: false, error: payload.message })),
+	on(UsersActions.loadUsersFailed, (state, { payload }) => ({ ...state, isLoading: false, error: payload.message })),
 	// loadUser
 	on(UsersActions.loadUser, state => ({ ...state, isLoading: true, error: null })),
 	on(UsersActions.loadUserSucceeded, (state, { payload }) => ({ ...state, selectedUser: payload.user, isLoading: false, error: null })),

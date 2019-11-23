@@ -13,12 +13,12 @@ export class ThreatsEffects {
 		private threatsHttpService: ThreatsHttpService,
 	) { }
 
-	public loadPaginatedThreats$ = createEffect(() => this.actions$.pipe(
-		ofType(ThreatsActions.loadPaginatedThreats),
+	public loadThreats$ = createEffect(() => this.actions$.pipe(
+		ofType(ThreatsActions.loadThreats),
 		pluck('payload'),
-		switchMap(({ requestConfig }) => this.threatsHttpService.getPaginatedThreats(requestConfig).pipe(
-			map(threats => ThreatsActions.loadPaginatedThreatsSucceeded({ payload: { threats } })),
-			catchError(error => of(ThreatsActions.loadPaginatedThreatsFailed(error))),
+		switchMap(({ requestConfig }) => this.threatsHttpService.getThreats(requestConfig).pipe(
+			map((res, count) => ThreatsActions.loadThreatsSucceeded({ payload: { threats: res.data, count } })),
+			catchError(error => of(ThreatsActions.loadThreatsFailed(error))),
 		)),
 	));
 

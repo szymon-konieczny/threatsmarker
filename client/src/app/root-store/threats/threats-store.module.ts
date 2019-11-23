@@ -6,7 +6,7 @@ import * as fromThreats from '.';
 
 @NgModule({
 	imports: [
-		StoreModule.forFeature('users', fromThreats.ThreatsReducer),
+		StoreModule.forFeature('threats', fromThreats.ThreatsReducer),
 		EffectsModule.forFeature([fromThreats.ThreatsEffects]),
 	]
 })

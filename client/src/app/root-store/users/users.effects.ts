@@ -13,12 +13,12 @@ export class UsersEffects {
 		private usersHttpService: UsersHttpService,
 	) { }
 
-	public loadPaginatedUsers$ = createEffect(() => this.actions$.pipe(
-		ofType(UsersActions.loadPaginatedUsers),
+	public loadUsers$ = createEffect(() => this.actions$.pipe(
+		ofType(UsersActions.loadUsers),
 		pluck('payload'),
-		switchMap(({ requestConfig }) => this.usersHttpService.getPaginatedUsers(requestConfig).pipe(
-			map((users) => UsersActions.loadPaginatedUsersSucceeded({ payload: { users } })),
-			catchError(error => of(UsersActions.loadPaginatedUsersFailed(error))),
+		switchMap(({ requestConfig }) => this.usersHttpService.getUsers(requestConfig).pipe(
+			map((res, count) => UsersActions.loadUsersSucceeded({ payload: { users: res.data, count } })),
+			catchError(error => of(UsersActions.loadUsersFailed(error))),
 		)),
 	));
 

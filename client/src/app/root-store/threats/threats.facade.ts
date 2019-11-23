@@ -15,8 +15,8 @@ export class ThreatsFacade {
 
 	constructor(private store: Store<ThreatsState>) { }
 
-	public loadPaginatedThreats(requestConfig: RequestConfig) {
-		this.store.dispatch(fromThreats.ThreatsActions.loadPaginatedThreats({ payload: { requestConfig } }));
+	public loadThreats(requestConfig: RequestConfig) {
+		this.store.dispatch(fromThreats.ThreatsActions.loadThreats({ payload: { requestConfig } }));
 	}
 
 	public addThreat(threatConfig: Threat) {

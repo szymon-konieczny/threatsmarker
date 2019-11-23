@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { AppConfig } from '../../../environments/environment';
-import { User, RequestConfig } from '../../shared/interfaces';
+import { User, RequestConfig, GetAllResponse } from '../../shared/interfaces';
 
 @Injectable({
 	providedIn: 'root'
@@ -15,9 +15,11 @@ export class UsersHttpService {
 		return `${AppConfig.apiUrl}/${path}`;
 	}
 
-	public getPaginatedUsers({ paginationConfig, filtersConfig }: RequestConfig): Observable<User[]> {
-		const { pageSize, pageNumber } = paginationConfig;
-		return this.http.get<User[]>(this.getApiUrl(`users?limit=${pageSize}&page=${pageNumber}&filters=${filtersConfig.filters}`));
+	public getUsers({ pageSize, pageNumber, filters, sortType }: RequestConfig): Observable<GetAllResponse<User>> {
+		const filtersList = filters.join(',');
+		return this.http.get<GetAllResponse<User>>(
+			this.getApiUrl(`users?limit=${pageSize}&page=${pageNumber}&filters=${filtersList}&sort=${sortType}`)
+		);
 	}
 
 	public getUser(userId: string): Observable<User> {

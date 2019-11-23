@@ -3,9 +3,9 @@ import { createAction, props } from '@ngrx/store';
 import { User, RequestConfig } from '../../shared/interfaces';
 
 export enum ActionTypes {
-	LOAD_PAGINATED_USERS = '[Users] Load Paginated Users Succeeded',
-	LOAD_PAGINATED_USERS_SUCCEEDED = '[Users] Load Paginated Users Succeeded',
-	LOAD_PAGINATED_USERS_FAILED = '[Users] Load Paginated Users Succeeded',
+	LOAD_USERS = '[Users] Load Users Succeeded',
+	LOAD_USERS_SUCCEEDED = '[Users] Load Users Succeeded',
+	LOAD_USERS_FAILED = '[Users] Load Users Succeeded',
 
 	LOAD_USER = '[Users] Load User',
 	LOAD_USER_SUCCEEDED = '[Users] Load User Succeeded',
@@ -24,15 +24,15 @@ export enum ActionTypes {
 	REMOVE_USER_FAILED = '[Users] Remove User Failed',
 }
 
-export const loadPaginatedUsers = createAction(
-	ActionTypes.LOAD_PAGINATED_USERS,
+export const loadUsers = createAction(
+	ActionTypes.LOAD_USERS,
 	props<{ payload: { requestConfig: RequestConfig } }>(),
 );
-export const loadPaginatedUsersSucceeded = createAction(
-	ActionTypes.LOAD_PAGINATED_USERS_SUCCEEDED,
-	props<{ payload: { users: User[] } }>(),
+export const loadUsersSucceeded = createAction(
+	ActionTypes.LOAD_USERS_SUCCEEDED,
+	props<{ payload: { users: User[], count: number } }>(),
 );
-export const loadPaginatedUsersFailed = createAction(ActionTypes.LOAD_PAGINATED_USERS_FAILED, props<{ payload: Error }>());
+export const loadUsersFailed = createAction(ActionTypes.LOAD_USERS_FAILED, props<{ payload: Error }>());
 
 export const loadUser = createAction(ActionTypes.LOAD_USER, props<{ payload: { userId: string } }>());
 export const loadUserSucceeded = createAction(ActionTypes.LOAD_USER_SUCCEEDED, props<{ payload: { user: User } }>());

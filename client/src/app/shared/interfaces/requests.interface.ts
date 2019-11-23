@@ -1,13 +1,11 @@
 export interface RequestConfig {
-	paginationConfig?: PaginationConfig;
-	filtersConfig?: FiltersConfig;
+	pageSize?: number;
+	pageNumber?: number;
+	filters?: string[];
+	sortType?: string;
 }
 
-export interface PaginationConfig {
-	pageSize: number;
-	pageNumber: number;
-}
-
-export interface FiltersConfig {
-	filters: string[];
+export interface GetAllResponse<T> {
+	data: T[];
+	count?: number;
 }

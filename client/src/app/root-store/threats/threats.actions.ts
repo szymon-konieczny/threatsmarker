@@ -3,9 +3,9 @@ import { createAction, props } from '@ngrx/store';
 import { Threat, RequestConfig } from '../../shared/interfaces';
 
 export enum ThreatsActions {
-	LOAD_PAGINATED_THREATS = '[Threats] Load Paginated Threats',
-	LOAD_PAGINATED_THREATS_SUCCEEDED = '[Threats] Load Paginated Threats Succeeded',
-	LOAD_PAGINATED_THREATS_FAILED = '[Threats] Load Paginated Threats Failed',
+	LOAD_THREATS = '[Threats] Load Threats',
+	LOAD_THREATS_SUCCEEDED = '[Threats] Load Threats Succeeded',
+	LOAD_THREATS_FAILED = '[Threats] Load Threats Failed',
 
 	ADD_THREAT = '[Threat] Add Threat',
 	ADD_THREAT_SUCCEEDED = '[Threat] Add Threat Succeeded',
@@ -20,15 +20,15 @@ export enum ThreatsActions {
 	REMOVE_THREAT_FAILED = '[Threats] Remove Threat Failed',
 }
 
-export const loadPaginatedThreats = createAction(
-	ThreatsActions.LOAD_PAGINATED_THREATS,
+export const loadThreats = createAction(
+	ThreatsActions.LOAD_THREATS,
 	props<{ payload: { requestConfig: RequestConfig } }>(),
 );
-export const loadPaginatedThreatsSucceeded = createAction(
-	ThreatsActions.LOAD_PAGINATED_THREATS_SUCCEEDED,
-	props<{ payload: { threats: Threat[] } }>(),
+export const loadThreatsSucceeded = createAction(
+	ThreatsActions.LOAD_THREATS_SUCCEEDED,
+	props<{ payload: { threats: Threat[], count: number } }>(),
 );
-export const loadPaginatedThreatsFailed = createAction(ThreatsActions.LOAD_PAGINATED_THREATS_FAILED, props<{ payload: Error }>());
+export const loadThreatsFailed = createAction(ThreatsActions.LOAD_THREATS_FAILED, props<{ payload: Error }>());
 
 export const addThreat = createAction(ThreatsActions.ADD_THREAT, props<{ payload: { threatConfig: Threat } }>());
 export const addThreatSucceeded = createAction(ThreatsActions.ADD_THREAT_SUCCEEDED, props<{ payload: { threat: Threat } }>());

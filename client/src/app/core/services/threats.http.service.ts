@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { AppConfig } from '../../../environments/environment';
-import { Threat, RequestConfig } from '../../shared/interfaces';
+import { Threat, RequestConfig, GetAllResponse } from '../../shared/interfaces';
 
 @Injectable({
 	providedIn: 'root'
@@ -15,9 +15,11 @@ export class ThreatsHttpService {
 		return `${AppConfig.apiUrl}/${path}`;
 	}
 
-	public getPaginatedThreats({ paginationConfig, filtersConfig }: RequestConfig): Observable<Threat[]> {
-		const { pageSize, pageNumber } = paginationConfig;
-		return this.http.get<Threat[]>(this.getApiUrl(`threats?limit=${pageSize}&page=${pageNumber}&filters=${filtersConfig.filters}`));
+	public getThreats({ pageSize, pageNumber, filters, sortType }: RequestConfig): Observable<GetAllResponse<Threat>> {
+		const filtersList = filters.join(',');
+		return this.http.get<GetAllResponse<Threat>>(
+			this.getApiUrl(`threats?limit=${pageSize}&page=${pageNumber}&filters=${filtersList}&sort=${sortType}`)
+		);
 	}
 
 	public getThreat(threatId: string): Observable<Threat> {

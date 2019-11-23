@@ -15,8 +15,8 @@ export class UsersFacade {
 
 	constructor(private store: Store<UsersState>) { }
 
-	public loadPaginatedUsers(requestConfig: RequestConfig) {
-		this.store.dispatch(fromUsers.UsersActions.loadPaginatedUsers({ payload: { requestConfig } }));
+	public loadUsers(requestConfig: RequestConfig) {
+		this.store.dispatch(fromUsers.UsersActions.loadUsers({ payload: { requestConfig } }));
 	}
 
 	public loadSingleUser(userId: string) {
