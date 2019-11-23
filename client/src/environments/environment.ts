@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const AppConfig = {
-  production: false,
-  apiUrl: 'localhost:8000',
+	production: false,
+	apiUrl: 'localhost:8000',
 };
 
 /*
