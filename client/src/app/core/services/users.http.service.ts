@@ -15,25 +15,24 @@ export class UsersHttpService {
 		return `${AppConfig.apiUrl}/${path}`;
 	}
 
-	public getPaginatedUsers(requestConfig: RequestConfig): Observable<User[]> {
-		const { pageSize, pageNumber } = requestConfig.paginationConfig;
-
-		return this.http.get<User[]>(this.getApiUrl(`api/users?limit=${pageSize}&page=${pageNumber}`));
+	public getPaginatedUsers({ paginationConfig, filtersConfig }: RequestConfig): Observable<User[]> {
+		const { pageSize, pageNumber } = paginationConfig;
+		return this.http.get<User[]>(this.getApiUrl(`users?limit=${pageSize}&page=${pageNumber}&filters=${filtersConfig.filters}`));
 	}
 
 	public getUser(userId: string): Observable<User> {
-		return this.http.get<User>(this.getApiUrl(`api/users/${userId}`));
+		return this.http.get<User>(this.getApiUrl(this.getApiUrl(`users/${userId}`)));
 	}
 
 	public addUser(userData: User): Observable<User> {
-		return this.http.post<User>(this.getApiUrl(`api/users`), userData);
+		return this.http.post<User>(this.getApiUrl(this.getApiUrl('users')), userData);
 	}
 
 	public updateUser(userData: User): Observable<User> {
-		return this.http.put<User>(this.getApiUrl(`api/users/${userData.id}`), userData);
+		return this.http.put<User>(this.getApiUrl(this.getApiUrl(`users/${userData.id}`)), userData);
 	}
 
 	public removeUser(userId: string): Observable<User> {
-		return this.http.delete<User>(this.getApiUrl(`api/users/${userId}`));
+		return this.http.delete<User>(this.getApiUrl(this.getApiUrl(`users/${userId}`)));
 	}
 }
