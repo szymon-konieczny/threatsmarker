@@ -1,8 +1,8 @@
 export interface RequestConfig {
-	pageSize?: number;
-	pageNumber?: number;
+	limit?: number;
+	page?: number;
 	filters?: string[];
-	sortType?: string;
+	sort?: string;
 }
 
 export interface GetAllResponse<T> {

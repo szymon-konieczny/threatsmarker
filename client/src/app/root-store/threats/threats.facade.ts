@@ -9,6 +9,7 @@ import { Threat, RequestConfig } from '../../shared/interfaces';
 export class ThreatsFacade {
 	public error$ = this.store.select(fromThreats.ThreatsSelectors.selectThreatsError);
 	public isLoading$ = this.store.select(fromThreats.ThreatsSelectors.selectThreatsIsLoading);
+	public count$ = this.store.select(fromThreats.ThreatsSelectors.selectThreatsCount);
 
 	public threatsStore$ = this.store.select(fromThreats.ThreatsSelectors.selectThreatsStore);
 	public threats$ = this.store.select(fromThreats.ThreatsSelectors.selectAllThreats);

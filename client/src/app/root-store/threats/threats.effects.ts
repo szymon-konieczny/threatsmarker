@@ -3,8 +3,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, switchMap, catchError, pluck, mergeMap } from 'rxjs/operators';
 
-import { ThreatsHttpService } from '../../core/services';
-import { ThreatsActions } from './';
+import { ThreatsHttpService } from '../../core/http';
+import * as ThreatsActions from './threats.actions';
 
 @Injectable()
 export class ThreatsEffects {
