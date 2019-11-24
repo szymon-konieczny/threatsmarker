@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { User, RequestConfig } from '../../shared/interfaces';
+import { User, RequestConfig } from '@interfaces';
 
 export enum ActionTypes {
 	LOAD_USERS = '[Users] Load Users Succeeded',
