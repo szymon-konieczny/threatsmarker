@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Threat, RequestConfig } from '../../shared/interfaces';
+import { Threat, RequestConfig } from '@interfaces';
 
 export enum ThreatsActions {
 	LOAD_THREATS = '[Threats] Load Threats',

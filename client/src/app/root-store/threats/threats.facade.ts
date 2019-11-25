@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { State as ThreatsState } from './state';
 import * as fromThreats from './';
-import { Threat, RequestConfig } from '../../shared/interfaces';
+import { Threat, RequestConfig } from '@interfaces';
 
 @Injectable()
 export class ThreatsFacade {

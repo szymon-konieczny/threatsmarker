@@ -5,9 +5,11 @@ import { EffectsModule } from '@ngrx/effects';
 import * as ThreatsReducer from './threats.reducer';
 import { ThreatsEffects } from './threats.effects';
 
+const FEATURE_NAME = 'threats';
+
 @NgModule({
 	imports: [
-		StoreModule.forFeature('threats', ThreatsReducer),
+		StoreModule.forFeature(FEATURE_NAME, ThreatsReducer),
 		EffectsModule.forFeature([ThreatsEffects]),
 	]
 })

@@ -3,44 +3,42 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { User, RequestConfig, GetAllResponse } from '../../shared/interfaces';
+import { User, RequestConfig, GetAllResponse } from '@interfaces';
 import { HttpService } from './http.service';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class UsersHttpService extends HttpService {
-	constructor(public http: HttpClient) {
-		super();
-	}
+export class UsersHttpService {
+	constructor(private httpService: HttpService, private http: HttpClient) { }
 
 	public getUsers(requestConfig: RequestConfig): Observable<GetAllResponse<User>> {
-		return this.http.get<GetAllResponse<User>>(this.createApiUrl('users', requestConfig), this.httpOptions).pipe(
-			catchError(error => this.handleError(error)),
+		return this.http.get<GetAllResponse<User>>(this.httpService.createApiUrl('users', requestConfig), this.httpService.httpOptions).pipe(
+			catchError(error => this.httpService.handleError(error)),
 		);
 	}
 
 	public getUser(userId: string): Observable<User> {
-		return this.http.get<User>(this.createApiUrl(`users/${userId}`), this.httpOptions).pipe(
-			catchError(error => this.handleError(error)),
+		return this.http.get<User>(this.httpService.createApiUrl(`users/${userId}`), this.httpService.httpOptions).pipe(
+			catchError(error => this.httpService.handleError(error)),
 		);
 	}
 
 	public addUser(userData: User): Observable<User> {
-		return this.http.post<User>(this.createApiUrl('users'), userData, this.httpOptions).pipe(
-			catchError(error => this.handleError(error)),
+		return this.http.post<User>(this.httpService.createApiUrl('users'), userData, this.httpService.httpOptions).pipe(
+			catchError(error => this.httpService.handleError(error)),
 		);
 	}
 
 	public updateUser(userData: User): Observable<User> {
-		return this.http.put<User>(this.createApiUrl(`users/${userData.id}`), userData, this.httpOptions).pipe(
-			catchError(error => this.handleError(error)),
+		return this.http.put<User>(this.httpService.createApiUrl(`users/${userData.id}`), userData, this.httpService.httpOptions).pipe(
+			catchError(error => this.httpService.handleError(error)),
 		);
 	}
 
 	public removeUser(userId: string): Observable<User> {
-		return this.http.delete<User>(this.createApiUrl(`users/${userId}`), this.httpOptions).pipe(
-			catchError(error => this.handleError(error)),
+		return this.http.delete<User>(this.httpService.createApiUrl(`users/${userId}`), this.httpService.httpOptions).pipe(
+			catchError(error => this.httpService.handleError(error)),
 		);
 	}
 }

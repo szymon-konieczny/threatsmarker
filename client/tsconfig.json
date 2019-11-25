@@ -1,7 +1,27 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "src",
+    "paths": {
+      "@env/*": [
+        "environments/*"
+      ],
+      "@core/*": [
+        "app/core/*"
+      ],
+      "@http": [
+        "app/core/http"
+      ],
+      "@shared/*": [
+        "app/shared/*"
+      ],
+      "@interfaces": [
+        "app/shared/interfaces"
+      ],
+      "@assets/*": [
+        "app/assets/*"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -22,5 +42,5 @@
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
-  }
+  },
 }

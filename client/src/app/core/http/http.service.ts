@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
 
-import { AppConfig } from '../../../environments/environment';
-import { RequestConfig } from '../../shared/interfaces';
+import { AppConfig } from '@env/environment';
+import { RequestConfig } from '@interfaces';
 
 @Injectable({
 	providedIn: 'root'

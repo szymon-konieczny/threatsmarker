@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { State as UsersState } from './state';
 import * as fromUsers from './';
-import { User, RequestConfig } from '../../shared/interfaces';
+import { User, RequestConfig } from '@interfaces';
 
 @Injectable()
 export class UsersFacade {
