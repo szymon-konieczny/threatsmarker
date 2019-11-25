@@ -25,7 +25,7 @@ export enum Roles {
 
 export const fetchUsers = (requestConfig): string => {
   const { page, limit, sortDirection, orderBy } = requestConfig;
-  const offset = limit * page - 1;
+  const offset = limit * (page - 1);
 
   return ` 
     SELECT * FROM ${USERS_TABLE_NAME}
