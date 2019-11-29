@@ -1,4 +1,5 @@
 import { uuid } from 'uuidv4';
+import { User } from './users.entity';
 
 const USERS_TABLE_NAME = 'users';
 
@@ -52,7 +53,7 @@ const checkIfEmailExistsInDatabase = (email: string): string => {
 }
 
 // user's columns => id, name, user_info, email, profile_picture_url, password, role, status, ban_time, threats_count, label
-export const addUser = (userConfig): string => {
+export const addUser = (userConfig: User): string => {
   const { name, email, userInfo, profilePictureUrl, password, role, status } = userConfig;
   const hashedPassword = password; // TODO: Make password encrypted ;)
 
