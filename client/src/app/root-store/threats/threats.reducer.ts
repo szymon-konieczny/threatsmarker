@@ -1,7 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 
 import { initialState, adapter, State } from './state';
-import { ThreatsActions } from './';
+import * as ThreatsActions from './threats.actions';
 
 export const threatsReducer = createReducer(
 	initialState,

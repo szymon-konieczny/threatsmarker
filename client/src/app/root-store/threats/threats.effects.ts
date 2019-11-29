@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { map, switchMap, catchError, pluck, mergeMap } from 'rxjs/operators';
 
 import { ThreatsHttpService } from '../../core/services';
-import { ThreatsActions } from './';
+import * as ThreatsActions from './threats.actions';
 
 @Injectable()
 export class ThreatsEffects {

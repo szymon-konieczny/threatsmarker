@@ -1,6 +1,6 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import { Threat } from '../../shared/interfaces';
+import { Threat } from '@interfaces';
 
 export interface State extends EntityState<Threat> {
 	count: number;

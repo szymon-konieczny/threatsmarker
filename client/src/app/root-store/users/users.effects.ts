@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { map, switchMap, catchError, pluck, mergeMap } from 'rxjs/operators';
 
 import { UsersHttpService } from '../../core/services';
-import { UsersActions } from './';
+import * as UsersActions from './users.actions';
 
 @Injectable()
 export class UsersEffects {
