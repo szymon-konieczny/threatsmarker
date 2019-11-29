@@ -4,10 +4,12 @@ import { EffectsModule } from '@ngrx/effects';
 
 import * as fromUsers from '.';
 
+const FEATURE_NAME = 'users';
+
 @NgModule({
 	declarations: [],
 	imports: [
-		StoreModule.forFeature('users', fromUsers.UsersReducer),
+		StoreModule.forFeature(FEATURE_NAME, fromUsers.UsersReducer),
 		EffectsModule.forFeature([fromUsers.UsersEffects]),
 	]
 })

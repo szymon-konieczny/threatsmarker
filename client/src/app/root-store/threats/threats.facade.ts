@@ -3,12 +3,13 @@ import { Store } from '@ngrx/store';
 
 import { State as ThreatsState } from './state';
 import * as fromThreats from './';
-import { Threat, RequestConfig } from '../../shared/interfaces';
+import { Threat, RequestConfig } from '@interfaces';
 
 @Injectable()
 export class ThreatsFacade {
 	public error$ = this.store.select(fromThreats.ThreatsSelectors.selectThreatsError);
 	public isLoading$ = this.store.select(fromThreats.ThreatsSelectors.selectThreatsIsLoading);
+	public count$ = this.store.select(fromThreats.ThreatsSelectors.selectThreatsCount);
 
 	public threatsStore$ = this.store.select(fromThreats.ThreatsSelectors.selectThreatsStore);
 	public threats$ = this.store.select(fromThreats.ThreatsSelectors.selectAllThreats);
