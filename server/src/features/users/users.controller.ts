@@ -4,8 +4,9 @@ import { usersService } from './users.service';
 
 class UsersController {
   public async getAll(req: Request, res: Response): Promise<void> {
-    const users = await usersService.getUsers(req.query);
-    res.json(users);
+    const data = await usersService.getUsers(req.query);
+    const count = data.length;
+    res.json({ data, count });
   }
 
   public async getUser(req: Request, res: Response): Promise<void> {
@@ -18,12 +19,14 @@ class UsersController {
     res.json(user);
   }
 
-  public updateUser(req: Request, res: Response): void {
-    res.json('Update User');
+  public async updateUser(req: Request, res: Response): Promise<void> {
+    const user = await usersService.updateUser(req.body);
+    res.json(user);
   }
 
-  public removeUser(req: Request, res: Response): void {
-    res.json('Remove User');
+  public async removeUser(req: Request, res: Response): Promise<void> {
+    const user = await usersService.removeUser(req.params.id);
+    res.json(user);
   }
 }
 

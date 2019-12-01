@@ -1,6 +1,6 @@
 export const pageNo = 1;
 
-export const limit = 3;
+export const limit = 10;
 
 export const orderBy = 'id';
 

@@ -1,8 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class User {
-  @PrimaryGeneratedColumn()
+export class Users {
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({
@@ -10,36 +10,51 @@ export class User {
   })
   name: string;
 
-  @Column('text')
+  @Column()
   email: string;
 
-  @Column('text')
+  @Column({
+    nullable: true,
+  })
   googleId: string;
 
-  @Column('text')
+  @Column({
+    nullable: true,
+  })
   facebookId: string;
 
-  @Column('text')
+  @Column({
+    nullable: true,
+  })
   userInfo: string;
 
-  @Column('text')
+  @Column({
+    nullable: true,
+  })
   profilePictureUrl: string;
 
-  @Column('text')
+  @Column()
   password: string;
 
-  @Column('text')
+  @Column()
   role: string;
 
-  @Column('text')
+  @Column()
   status: string;
 
-  @Column('text')
+  @Column({
+    nullable: true,
+  })
   label: string;
 
-  @Column()
+  @Column({
+    type: 'boolean',
+    nullable: true,
+  })
   isBanned: boolean;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   banEnd: number;
 }

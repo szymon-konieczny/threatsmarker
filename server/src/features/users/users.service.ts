@@ -1,8 +1,8 @@
 import { getRepository } from "typeorm";
 import { uuid } from "uuidv4";
 
-import { User } from "./users.entity";
-import { RequestListConfig } from "../../interfaces";
+import { Users } from "./users.entity";
+import { RequestListConfig, User } from "../../interfaces";
 import * as DEFAULTS from '../../constants';
 
 class UsersService {
@@ -14,7 +14,7 @@ class UsersService {
       orderBy = DEFAULTS.orderBy,
     } = reqConfig;
     const offset = limit * (page - 1);
-    const userRepository = getRepository(User);
+    const userRepository = getRepository(Users);
 
     return await userRepository
       .createQueryBuilder('user')
@@ -25,58 +25,37 @@ class UsersService {
   }
 
   public async getUser(id: string): Promise<User> {
-    const userRepository = getRepository(User);
+    const userRepository = getRepository(Users);
     return await userRepository.findOne({ id });
   }
 
   public async addUser(userData: User): Promise<User> {
-    const userRepository = getRepository(User);
+    const userRepository = getRepository(Users);
     const id = uuid();
     const userConfig = {
       id,
       ...userData,
     };
-    const user = await userRepository.create(userConfig);
+    const user = userRepository.create({ ...userConfig });
     return await userRepository.save(user);
-    // return res.send(results);
-
-    // const userRepository = getRepository(User);
-    // const { name, email, userInfo, profilePictureUrl, password, role, status } = userData;
-    // const id = uuid();
-
-    // return await userRepository.create({
-    //   id,
-    //   name,
-    //   email,
-    //   userInfo: userInfo,
-    //   profilePictureUrl,
-    //   password,
-    //   role,
-    //   status,
-    // });
   }
 
-  public async updateUser(userData: any): Promise<any> {
-    const userRepository = getRepository(User);
-    const { name, email, userInfo, profilePictureUrl, password, role, status, isBanned, banEnd } = userData;
-
-    return await userRepository.update(1, {
-      name,
-      email,
-      userInfo: userInfo,
-      profilePictureUrl,
-      password,
-      role,
-      status,
-      isBanned,
-      banEnd,
+  public async updateUser(userData: User): Promise<User> {
+    const userRepository = getRepository(Users);
+    await userRepository.update(userData.id, {
+      ...userData,
     });
+    return await this.getUser(userData.id);
   }
 
-  public async removeUser(id: string): Promise<any> {
-    const userRepository = getRepository(User);
-
-    return await userRepository.delete({ id })
+  public async removeUser(id: string): Promise<User> {
+    const removedUser = await this.getUser(id);
+    const userRepository = getRepository(Users);
+    await userRepository.update(id, {
+      ...removedUser,
+      status: 'deleted',
+    });
+    return await this.getUser(id);
   }
 }
 

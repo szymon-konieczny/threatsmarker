@@ -1,10 +1,15 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 import 'reflect-metadata';
+import cors from 'cors';
 
 import router from './features';
 import * as Database from './database';
 
 const app = express();
+
+app.use(cors());
+app.use(bodyParser.json());
 
 app.use('/api', router);
 
@@ -23,7 +28,3 @@ app.listen(8080, () => {
     // here you can start to work with your entities
   }).catch(error => console.log(error));;
 });
-
-
-// logger: pino/winston, config: dotenv, walidacja: joi/class validator
-// error handling

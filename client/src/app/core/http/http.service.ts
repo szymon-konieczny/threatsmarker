@@ -14,7 +14,7 @@ export class HttpService {
 			'Content-Type': 'application/json',
 			Accept: 'application/json',
 		}),
-		withCredentials: true,
+		// withCredentials: true,
 	};
 
 	public handleError(err: any, showNotification = true) {

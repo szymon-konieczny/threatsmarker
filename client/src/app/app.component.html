@@ -1,4 +1,14 @@
-<button (click)="onGetUser()">Get User</button>
-<button (click)="onAddUser()">Add User</button>
-<button (click)="onUpdateUser()">Update User</button>
-<button (click)="onRemoveUser()">Remove User</button>
+<button class="btn" (click)="onGetAllUsers()">Get All Users</button>
+<button class="btn" (click)="onGetUser()">Get User</button>
+<button class="btn" (click)="onAddUser()">Add User</button>
+<button class="btn" (click)="onUpdateUser()">Update User</button>
+<button class="btn" (click)="onRemoveUser()">Remove User</button>
+
+<main class="main">
+  <h4>Users:</h4>
+  <ul>
+    <li *ngFor="let user of (users$ | async)">
+      {{ user?.name }} | status: {{ user?.status }}
+    </li>
+  </ul>
+</main>

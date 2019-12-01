@@ -9,4 +9,7 @@ export interface User {
   password?: string;
   role?: string;
   status?: string;
+  label?: string;
+  isBanned?: boolean;
+  banEnd?: number;
 }
