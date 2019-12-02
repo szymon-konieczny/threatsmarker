@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/szymon-konieczny/threatsmarker/readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pino": "^5.14.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.1",
