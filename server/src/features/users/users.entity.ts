@@ -5,32 +5,22 @@ export class Users {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({
-    length: 100,
-  })
+  @Column({ length: 100 })
   name: string;
 
   @Column()
   email: string;
 
-  @Column({
-    nullable: true,
-  })
+  @Column({ nullable: true })
   googleId: string;
 
-  @Column({
-    nullable: true,
-  })
+  @Column({ nullable: true })
   facebookId: string;
 
-  @Column({
-    nullable: true,
-  })
+  @Column({ nullable: true })
   userInfo: string;
 
-  @Column({
-    nullable: true,
-  })
+  @Column({ nullable: true })
   profilePictureUrl: string;
 
   @Column()
@@ -42,19 +32,9 @@ export class Users {
   @Column()
   status: string;
 
-  @Column({
-    nullable: true,
-  })
+  @Column({ nullable: true })
   label: string;
 
-  @Column({
-    type: 'boolean',
-    nullable: true,
-  })
-  isBanned: boolean;
-
-  @Column({
-    nullable: true,
-  })
+  @Column({ nullable: true })
   banEnd: number;
 }

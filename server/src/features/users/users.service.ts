@@ -1,17 +1,16 @@
 import { getRepository } from "typeorm";
-import { uuid } from "uuidv4";
 
 import { Users } from "./users.entity";
 import { RequestListConfig, User } from "../../interfaces";
-import * as DEFAULTS from '../../constants';
+import { RequestConfig, Statuses } from '../../constants';
 
 class UsersService {
   public async getUsers(reqConfig: RequestListConfig): Promise<User[]> {
     const {
-      page = DEFAULTS.pageNo,
-      limit = DEFAULTS.limit,
-      sortDirection = DEFAULTS.sortDirection,
-      orderBy = DEFAULTS.orderBy,
+      page = RequestConfig.PAGE_NO,
+      limit = RequestConfig.LIMIT,
+      sortDirection = RequestConfig.SORT_DIRECTION,
+      orderBy = RequestConfig.ORDER_BY,
     } = reqConfig;
     const offset = limit * (page - 1);
     const userRepository = getRepository(Users);
@@ -31,9 +30,7 @@ class UsersService {
 
   public async addUser(userData: User): Promise<User> {
     const userRepository = getRepository(Users);
-    const id = uuid();
     const userConfig = {
-      id,
       ...userData,
     };
     const user = userRepository.create({ ...userConfig });
@@ -53,7 +50,7 @@ class UsersService {
     const userRepository = getRepository(Users);
     await userRepository.update(id, {
       ...removedUser,
-      status: 'deleted',
+      status: Statuses.DELETED,
     });
     return await this.getUser(id);
   }

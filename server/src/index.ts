@@ -1,10 +1,14 @@
 import express from 'express';
-import bodyParser from 'body-parser';
-import 'reflect-metadata';
 import cors from 'cors';
+import 'reflect-metadata';
 
+import dotenv from 'dotenv';
+import bodyParser from 'body-parser';
+
+import { connect } from './database';
 import router from './features';
-import * as Database from './database';
+
+dotenv.config();
 
 const app = express();
 
@@ -15,16 +19,15 @@ app.use('/api', router);
 
 export const connectDatabase = async () => {
   try {
-    await Database.connect().then(conn => conn.runMigrations());
+    await connect().then(conn => conn.runMigrations());
   } catch (err) {
     throw new Error(err);
   }
 }
 
-app.listen(8080, () => {
+app.listen(process.env.PORT, () => {
   console.log('Server is listening');
   connectDatabase().then(connection => {
     console.log('conn: ', connection);
-    // here you can start to work with your entities
   }).catch(error => console.log(error));;
 });

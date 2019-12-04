@@ -1,7 +1,4 @@
-export enum SortDirection {
-  ASC = 'ASC',
-  DESC = 'DESC',
-}
+import { SortDirection } from "../constants";
 
 export interface RequestListConfig {
   page?: number;
