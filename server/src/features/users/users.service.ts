@@ -1,4 +1,5 @@
-import { getRepository } from "typeorm";
+import { getRepository } from 'typeorm';
+import { Container } from 'typedi';
 
 import { UserEntity } from "./users.entity";
 import { RequestListConfig, User } from "../../interfaces";
@@ -56,4 +57,4 @@ class UsersService {
   }
 }
 
-export const usersService = new UsersService();
+export const usersService = Container.get(UsersService);
