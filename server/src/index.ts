@@ -5,8 +5,8 @@ import 'reflect-metadata';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 
-import { connect } from './database';
 import router from './features';
+import { connectDatabase } from './helpers';
 
 dotenv.config();
 
@@ -17,14 +17,7 @@ app.use(bodyParser.json());
 
 app.use('/api', router);
 
-export const connectDatabase = async () => {
-  try {
-    await connect().then(conn => conn.runMigrations());
-  } catch (err) {
-    throw new Error(err);
-  }
-}
-
+// TODO: use a promise instead of the callback
 app.listen(process.env.PORT, () => {
   console.log('Server is listening');
   connectDatabase().then(connection => {

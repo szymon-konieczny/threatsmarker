@@ -46,10 +46,10 @@ class UsersService {
   }
 
   public async removeUser(id: string): Promise<User> {
-    const removedUser = await this.getUser(id);
+    const userConfig = await this.getUser(id);
     const userRepository = getRepository(Users);
     await userRepository.update(id, {
-      ...removedUser,
+      ...userConfig,
       status: Statuses.DELETED,
     });
     return await this.getUser(id);
