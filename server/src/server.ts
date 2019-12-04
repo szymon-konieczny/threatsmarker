@@ -22,13 +22,11 @@ export class Server {
   }
 
   private async listen() {
-    return await this.app.listen(process.env.PORT, () => {
-      try {
-        return connectDatabase();
-      } catch (err) {
-        throw new Error(err);
-      }
-    });
+    try {
+      return await this.app.listen(process.env.PORT, connectDatabase);
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 
   public initializeServer() {
