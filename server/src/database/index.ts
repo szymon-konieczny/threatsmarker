@@ -1,6 +1,6 @@
 import { createConnection } from 'typeorm';
 
-import { Users } from '../features/users/users.entity';
+import { UserEntity } from '../features/users/users.entity';
 import { env } from '../config/env';
 
 export const connect = () => createConnection({
@@ -11,7 +11,7 @@ export const connect = () => createConnection({
   password: env.DB_PASS,
   database: env.DB_NAME,
   entities: [
-    Users,
+    UserEntity,
   ],
   synchronize: true,
   logging: false

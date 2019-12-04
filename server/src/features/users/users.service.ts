@@ -1,6 +1,6 @@
 import { getRepository } from "typeorm";
 
-import { Users } from "./users.entity";
+import { UserEntity } from "./users.entity";
 import { RequestListConfig, User } from "../../interfaces";
 import { RequestConfig, Statuses } from '../../constants';
 
@@ -13,7 +13,7 @@ class UsersService {
       orderBy = RequestConfig.ORDER_BY,
     } = reqConfig;
     const offset = limit * (page - 1);
-    const userRepository = getRepository(Users);
+    const userRepository = getRepository(UserEntity);
 
     return await userRepository
       .createQueryBuilder('user')
@@ -24,12 +24,12 @@ class UsersService {
   }
 
   public async getUser(id: string): Promise<User> {
-    const userRepository = getRepository(Users);
+    const userRepository = getRepository(UserEntity);
     return await userRepository.findOne({ id });
   }
 
   public async addUser(userData: User): Promise<User> {
-    const userRepository = getRepository(Users);
+    const userRepository = getRepository(UserEntity);
     const userConfig = {
       ...userData,
     };
@@ -38,7 +38,7 @@ class UsersService {
   }
 
   public async updateUser(userData: User): Promise<User> {
-    const userRepository = getRepository(Users);
+    const userRepository = getRepository(UserEntity);
     await userRepository.update(userData.id, {
       ...userData,
     });
@@ -47,7 +47,7 @@ class UsersService {
 
   public async removeUser(id: string): Promise<User> {
     const userConfig = await this.getUser(id);
-    const userRepository = getRepository(Users);
+    const userRepository = getRepository(UserEntity);
     await userRepository.update(id, {
       ...userConfig,
       status: Statuses.DELETED,
