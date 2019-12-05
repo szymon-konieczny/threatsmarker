@@ -4,34 +4,33 @@ import bodyParser from 'body-parser';
 
 import router from './features';
 import { connectDatabase } from './helpers';
+import { env } from './config/env';
 
 export class Server {
   private app: Express;
 
-  public init() {
+  public async init() {
     this.app = express();
     this.app.use(cors());
     this.app.use(bodyParser.json());
 
-    this.initializeRouting();
-    this.initializeServer();
+    await this.initializeRouting();
+    await connectDatabase();
+    await this.initializeServer(env.PORT);
   }
 
   private initializeRouting() {
     this.app.use('/api', router);
   }
 
-  private async listen() {
-    try {
-      return await this.app.listen(process.env.PORT, connectDatabase);
-    } catch (err) {
-      throw new Error(err);
-    }
+  private async listen(port: number): Promise<void> {
+    return new Promise(resolve => this.app.listen(port, resolve));
   }
 
-  public initializeServer() {
-    this.listen()
+  public initializeServer(port: number) {
+    this.listen(port)
       .then(connection => { console.log('conn: ', connection); })
       .catch((err) => { throw new Error(err); });
   }
 };
+
