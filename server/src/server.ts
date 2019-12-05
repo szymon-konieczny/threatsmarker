@@ -33,4 +33,3 @@ export class Server {
       .catch((err) => { throw new Error(err); });
   }
 };
-
