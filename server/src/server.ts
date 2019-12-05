@@ -14,7 +14,7 @@ export class Server {
     this.app.use(cors());
     this.app.use(bodyParser.json());
 
-    await this.initializeRouting();
+    this.initializeRouting();
     await connectDatabase();
     await this.initializeServer(env.PORT);
   }
