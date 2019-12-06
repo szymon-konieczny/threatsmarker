@@ -13,7 +13,7 @@ export class UsersFacade {
 
 	public usersStore$ = this.store.select(fromUsers.UsersSelectors.selectUsersStore);
 	public users$ = this.store.select(fromUsers.UsersSelectors.selectAllUsers);
-	public selectedUserId$ = this.store.select(fromUsers.UsersSelectors.selectUserId);
+	public selectedUser$ = this.store.select(fromUsers.UsersSelectors.selectUser);
 
 	constructor(private store: Store<UsersState>) { }
 

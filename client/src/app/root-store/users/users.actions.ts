@@ -1,11 +1,11 @@
 import { createAction, props } from '@ngrx/store';
 
-import { User, RequestConfig } from '@interfaces';
+import { User, RequestConfig, GetAllResponse } from '@interfaces';
 
 export enum ActionTypes {
-	LOAD_USERS = '[Users] Load Users Succeeded',
+	LOAD_USERS = '[Users] Load Users',
 	LOAD_USERS_SUCCEEDED = '[Users] Load Users Succeeded',
-	LOAD_USERS_FAILED = '[Users] Load Users Succeeded',
+	LOAD_USERS_FAILED = '[Users] Load Users Failed',
 
 	LOAD_USER = '[Users] Load User',
 	LOAD_USER_SUCCEEDED = '[Users] Load User Succeeded',
@@ -30,7 +30,7 @@ export const loadUsers = createAction(
 );
 export const loadUsersSucceeded = createAction(
 	ActionTypes.LOAD_USERS_SUCCEEDED,
-	props<{ payload: { users: User[], count: number } }>(),
+	props<{ payload: GetAllResponse<User> }>(),
 );
 export const loadUsersFailed = createAction(ActionTypes.LOAD_USERS_FAILED, props<{ payload: Error }>());
 

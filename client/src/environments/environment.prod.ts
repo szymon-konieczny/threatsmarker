@@ -1,4 +1,4 @@
 export const AppConfig = {
 	production: true,
-	apiUrl: 'localhost:8000',
+	apiUrl: 'http://localhost:8080/api',
 };

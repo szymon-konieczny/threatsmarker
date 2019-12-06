@@ -3,7 +3,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { User } from '@interfaces';
 
 export interface State extends EntityState<User> {
-	selectedUserId: string;
+	selectedUser: User;
 	count: number;
 	isLoading: boolean;
 	error: string;
@@ -12,7 +12,7 @@ export interface State extends EntityState<User> {
 export const defaultUsers: State = {
 	ids: [],
 	entities: {},
-	selectedUserId: null,
+	selectedUser: null,
 	count: null,
 	isLoading: false,
 	error: null,

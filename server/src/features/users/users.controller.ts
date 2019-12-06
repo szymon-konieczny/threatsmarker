@@ -1,24 +1,32 @@
 import { Request, Response } from 'express';
 
+import { usersService } from './users.service';
+
 class UsersController {
-  public getAll(req: Request, res: Response): void {
-    res.json([1, 2, 3, 4, 5]);
+  public async getAll(req: Request, res: Response): Promise<void> {
+    const data = await usersService.getUsers(req.query);
+    const count = data.length;
+    res.json({ data, count });
   }
 
-  public getUser(req: Request, res: Response): void {
-    res.json('Get User');
+  public async getUser(req: Request, res: Response): Promise<void> {
+    const user = await usersService.getUser(req.params.id);
+    res.json(user);
   }
 
-  public addUser(req: Request, res: Response): void {
-    res.json('Add User');
+  public async addUser(req: Request, res: Response): Promise<void> {
+    const user = await usersService.addUser(req.body);
+    res.json(user);
   }
 
-  public updateUser(req: Request, res: Response): void {
-    res.json('Update User');
+  public async updateUser(req: Request, res: Response): Promise<void> {
+    const user = await usersService.updateUser(req.body);
+    res.json(user);
   }
 
-  public removeUser(req: Request, res: Response): void {
-    res.json('Remove User');
+  public async removeUser(req: Request, res: Response): Promise<void> {
+    const user = await usersService.removeUser(req.params.id);
+    res.json(user);
   }
 }
 
