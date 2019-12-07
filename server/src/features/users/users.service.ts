@@ -3,15 +3,15 @@ import { Container } from 'typedi';
 
 import { UserEntity } from "./users.entity";
 import { RequestListConfig, User } from "../../interfaces";
-import { RequestConfig, Statuses } from '../../constants';
+import { DefaultRequestConfig, UserStatuses } from '../../constants';
 
 class UsersService {
   public async getUsers(reqConfig: RequestListConfig): Promise<User[]> {
     const {
-      page = RequestConfig.PAGE_NO,
-      limit = RequestConfig.LIMIT,
-      sortDirection = RequestConfig.SORT_DIRECTION,
-      orderBy = RequestConfig.ORDER_BY,
+      page = DefaultRequestConfig.PAGE_NO,
+      limit = DefaultRequestConfig.LIMIT,
+      sortDirection = DefaultRequestConfig.SORT_DIRECTION,
+      orderBy = DefaultRequestConfig.ORDER_BY,
     } = reqConfig;
     const offset = limit * (page - 1);
     const userRepository = getRepository(UserEntity);
@@ -51,7 +51,7 @@ class UsersService {
     const userRepository = getRepository(UserEntity);
     await userRepository.update(id, {
       ...userConfig,
-      status: Statuses.DELETED,
+      status: UserStatuses.DELETED,
     });
     return await this.getUser(id);
   }
