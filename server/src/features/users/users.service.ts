@@ -4,8 +4,15 @@ import { Container } from 'typedi';
 import { UserEntity } from "./users.entity";
 import { RequestListConfig, User } from "../../interfaces";
 import { RequestConfig, Statuses } from '../../constants';
+import { Logger } from 'src/utils';
 
 class UsersService {
+  private logger: Logger;
+
+  constructor() {
+    this.logger = new Logger();
+  }
+
   public async getUsers(reqConfig: RequestListConfig): Promise<User[]> {
     const {
       page = RequestConfig.PAGE_NO,
@@ -26,7 +33,11 @@ class UsersService {
 
   public async getUser(id: string): Promise<User> {
     const userRepository = getRepository(UserEntity);
-    return await userRepository.findOne({ id });
+    try {
+      return await userRepository.findOne({ id });
+    } catch (err) {
+      this.logger.logError({}, err)
+    }
   }
 
   public async addUser(userData: User): Promise<User> {
