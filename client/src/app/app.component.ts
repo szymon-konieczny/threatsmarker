@@ -12,7 +12,7 @@ import { User, RequestConfig } from '@interfaces';
 })
 export class AppComponent implements OnInit, OnDestroy {
 	private readonly userId = 'b9ae6f87-b082-4fe8-851e-b7ef98a34957';
-	private readonly mockedUserToAdd: User = {
+	private readonly mockedUserToAdd: Partial<User> = {
 		name: 'Szymon',
 		email: 'sz@mo.n',
 		googleId: '',
