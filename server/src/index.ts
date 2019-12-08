@@ -1,13 +1,10 @@
-import express from 'express';
-import router from './features';
+import 'reflect-metadata';
 
-const app = express();
+import dotenv from 'dotenv';
 
-app.use('/api', router);
+import { Server } from './server';
 
-app.listen(8080, () => {
-  console.log('Server is listening');
-});
+dotenv.config();
 
-// logger: pino/winston, config: dotenv, walidacja: joi/class validator
-// error handling
+const server = new Server();
+server.init();

@@ -25,11 +25,11 @@ export class UsersFacade {
 		this.store.dispatch(fromUsers.UsersActions.loadUser({ payload: { userId } }));
 	}
 
-	public addUser(userConfig: User) {
+	public addUser(userConfig: Partial<User>) {
 		this.store.dispatch(fromUsers.UsersActions.addUser({ payload: { userConfig } }));
 	}
 
-	public updateUser(userConfig: User) {
+	public updateUser(userConfig: Partial<User>) {
 		this.store.dispatch(fromUsers.UsersActions.updateUser({ payload: { userConfig } }));
 	}
 

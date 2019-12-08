@@ -4,7 +4,6 @@
     "module": "commonjs",
     "outDir": "build",
     "sourceMap": false,
-    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -12,6 +11,13 @@
     "noImplicitAny": false,
     "esModuleInterop": true
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["src/**/*.spec.ts"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts",
+    "src/migrations"
+  ],
+  "emitDecoratorMetadata": true,
+  "experimentalDecorators": true,
 }

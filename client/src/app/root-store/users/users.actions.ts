@@ -1,11 +1,11 @@
 import { createAction, props } from '@ngrx/store';
 
-import { User, RequestConfig } from '@interfaces';
+import { User, RequestConfig, GetAllResponse } from '@interfaces';
 
 export enum ActionTypes {
-	LOAD_USERS = '[Users] Load Users Succeeded',
+	LOAD_USERS = '[Users] Load Users',
 	LOAD_USERS_SUCCEEDED = '[Users] Load Users Succeeded',
-	LOAD_USERS_FAILED = '[Users] Load Users Succeeded',
+	LOAD_USERS_FAILED = '[Users] Load Users Failed',
 
 	LOAD_USER = '[Users] Load User',
 	LOAD_USER_SUCCEEDED = '[Users] Load User Succeeded',
@@ -30,7 +30,7 @@ export const loadUsers = createAction(
 );
 export const loadUsersSucceeded = createAction(
 	ActionTypes.LOAD_USERS_SUCCEEDED,
-	props<{ payload: { users: User[], count: number } }>(),
+	props<{ payload: GetAllResponse<User> }>(),
 );
 export const loadUsersFailed = createAction(ActionTypes.LOAD_USERS_FAILED, props<{ payload: Error }>());
 
@@ -38,11 +38,11 @@ export const loadUser = createAction(ActionTypes.LOAD_USER, props<{ payload: { u
 export const loadUserSucceeded = createAction(ActionTypes.LOAD_USER_SUCCEEDED, props<{ payload: { user: User } }>());
 export const loadUserFailed = createAction(ActionTypes.LOAD_USER_FAILED, props<{ payload: Error }>());
 
-export const addUser = createAction(ActionTypes.ADD_USER, props<{ payload: { userConfig: User } }>());
+export const addUser = createAction(ActionTypes.ADD_USER, props<{ payload: { userConfig: Partial<User> } }>());
 export const addUserSucceeded = createAction(ActionTypes.ADD_USER_SUCCEEDED, props<{ payload: { user: User } }>());
 export const addUserFailed = createAction(ActionTypes.ADD_USER_FAILED, props<{ payload: Error }>());
 
-export const updateUser = createAction(ActionTypes.UPDATE_USER, props<{ payload: { userConfig: User } }>());
+export const updateUser = createAction(ActionTypes.UPDATE_USER, props<{ payload: { userConfig: Partial<User> } }>());
 export const updateUserSucceeded = createAction(ActionTypes.UPDATE_USER_SUCCEEDED, props<{ payload: { user: User } }>());
 export const updateUserFailed = createAction(ActionTypes.UPDATE_USER_FAILED, props<{ payload: Error }>());
 

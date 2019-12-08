@@ -17,7 +17,7 @@ export class UsersEffects {
 		ofType(UsersActions.loadUsers),
 		pluck('payload'),
 		switchMap(({ requestConfig }) => this.usersHttpService.getUsers(requestConfig).pipe(
-			map((res, count) => UsersActions.loadUsersSucceeded({ payload: { users: res.data, count } })),
+			map(data => UsersActions.loadUsersSucceeded({ payload: data })),
 			catchError(error => of(UsersActions.loadUsersFailed(error))),
 		)),
 	));
@@ -26,7 +26,7 @@ export class UsersEffects {
 		ofType(UsersActions.loadUser),
 		pluck('payload'),
 		switchMap(({ userId }) => this.usersHttpService.getUser(userId).pipe(
-			map((user) => UsersActions.loadUserSucceeded({ payload: { user } })),
+			map(user => UsersActions.loadUserSucceeded({ payload: { user } })),
 			catchError(error => of(UsersActions.loadUserFailed(error))),
 		)),
 	));
