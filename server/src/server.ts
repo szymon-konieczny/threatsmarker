@@ -1,7 +1,6 @@
 import express, { Express } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import expressPino from 'express-pino-logger';
 
 import router from './features';
 import { connectDatabase } from './helpers';
@@ -27,7 +26,7 @@ export class Server {
   private initializeMiddleware() {
     this.app.use(cors());
     this.app.use(bodyParser.json());
-    this.app.use(expressPino({ logger: this.logger }));
+    this.logger.attachLoggingMiddleware(this.app);
   }
 
   private initializeRouting() {

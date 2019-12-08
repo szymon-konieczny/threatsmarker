@@ -1,4 +1,6 @@
+import { Express } from 'express';
 import pino, { LoggerOptions } from 'pino';
+import expressPino from 'express-pino-logger';
 
 export class Logger {
   private logger: pino.Logger;
@@ -22,5 +24,9 @@ export class Logger {
 
   public logWarn(object: any, msg: string) {
     this.logger.warn(object, msg);
+  }
+
+  public attachLoggingMiddleware(app: Express) {
+    app.use(expressPino({ logger: this.logger }));
   }
 }
