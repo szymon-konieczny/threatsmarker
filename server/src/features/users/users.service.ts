@@ -2,13 +2,13 @@ import { getRepository } from 'typeorm';
 import { Container } from 'typedi';
 
 import { UserEntity } from "./users.entity";
-import { RequestListConfig, User } from "../../interfaces";
+import { RequestListConfig, User, GetAllResponse } from "../../interfaces";
 import { DefaultRequestConfig, UserStatuses } from '../../constants';
 import { getConfig } from '../../helpers';
 import { getOffset } from 'src/helpers/getOffset';
 
 class UsersService {
-  public async getUsers(reqConfig: RequestListConfig): Promise<User[]> {
+  public async getUsers(reqConfig: RequestListConfig): Promise<GetAllResponse<UserEntity>> {
     const {
       page = DefaultRequestConfig.PAGE_NO,
       limit = DefaultRequestConfig.LIMIT,
@@ -18,12 +18,14 @@ class UsersService {
     const offset = getOffset(limit, page);
     const userRepository = getRepository(UserEntity);
 
-    return await userRepository
+    const data = await userRepository
       .createQueryBuilder('user')
       .orderBy(orderBy, sortDirection)
       .skip(offset)
       .take(limit)
-      .getMany();
+      .getManyAndCount();
+
+    return { data: data[0], count: data[1] }
   }
 
   public async getUser(id: string): Promise<User> {

@@ -6,3 +6,8 @@ export interface RequestListConfig {
   orderBy?: string;
   sortDirection?: SortDirection;
 }
+
+export interface GetAllResponse<T> {
+  data: T[];
+  count?: number;
+}
