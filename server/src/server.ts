@@ -11,12 +11,15 @@ export class Server {
 
   public async init() {
     this.app = express();
-    this.app.use(cors());
-    this.app.use(bodyParser.json());
-
+    this.initializeMiddleware();
     this.initializeRouting();
     await connectDatabase();
     await this.initializeServer(env.PORT);
+  }
+
+  private initializeMiddleware() {
+    this.app.use(cors());
+    this.app.use(bodyParser.json());
   }
 
   private initializeRouting() {
