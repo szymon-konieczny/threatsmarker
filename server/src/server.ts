@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import * as expressPino from 'express-pino-logger';
+import expressPino from 'express-pino-logger';
 
 import router from './features';
 import { connectDatabase } from './helpers';
