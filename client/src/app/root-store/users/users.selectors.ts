@@ -1,7 +1,6 @@
 import { createSelector, createFeatureSelector, MemoizedSelector } from '@ngrx/store';
 
 import { State, adapter } from './state';
-import { User } from '@interfaces';
 
 export const getSelectedUserId = (state: State) => state.selectedUserId;
 export const getIsLoading = (state: State) => state.isLoading;
