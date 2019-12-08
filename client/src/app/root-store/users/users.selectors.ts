@@ -9,7 +9,7 @@ export const getCount = (state: State) => state.count;
 
 export const selectUsersStore: MemoizedSelector<object, State> = createFeatureSelector<State>('users');
 
-export const selectedUserId: MemoizedSelector<object, string> = createSelector(selectUsersStore, getSelectedUserId);
+export const selectUserId: MemoizedSelector<object, string> = createSelector(selectUsersStore, getSelectedUserId);
 export const selectUsersIsLoading: MemoizedSelector<object, boolean> = createSelector(selectUsersStore, getIsLoading);
 export const selectUsersError: MemoizedSelector<object, string> = createSelector(selectUsersStore, getError);
 export const selectUsersCount: MemoizedSelector<object, number> = createSelector(selectUsersStore, getCount);
