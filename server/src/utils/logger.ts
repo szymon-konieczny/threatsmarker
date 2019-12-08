@@ -1,11 +1,12 @@
-import pino from 'pino';
+import pino, { LoggerOptions } from 'pino';
 
 export class Logger {
   private logger: pino.Logger;
 
-  constructor() {
+  constructor(config?: LoggerOptions) {
     const pinoConfig = {
       prettyPrint: true,
+      ...config,
     }
 
     this.logger = pino(pinoConfig);

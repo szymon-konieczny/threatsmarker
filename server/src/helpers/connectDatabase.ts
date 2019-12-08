@@ -1,5 +1,5 @@
 import { connect } from '../database';
-import { Logger } from 'src/utils';
+import { Logger } from '../utils';
 
 export const connectDatabase = async (): Promise<void> => {
   const logger = new Logger();
