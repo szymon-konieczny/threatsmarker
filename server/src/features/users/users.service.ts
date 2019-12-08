@@ -4,6 +4,8 @@ import { Container } from 'typedi';
 import { UserEntity } from "./users.entity";
 import { RequestListConfig, User } from "../../interfaces";
 import { DefaultRequestConfig, UserStatuses } from '../../constants';
+import { getConfig } from '../../helpers';
+import { getOffset } from 'src/helpers/getOffset';
 
 class UsersService {
   public async getUsers(reqConfig: RequestListConfig): Promise<User[]> {
@@ -13,7 +15,7 @@ class UsersService {
       sortDirection = DefaultRequestConfig.SORT_DIRECTION,
       orderBy = DefaultRequestConfig.ORDER_BY,
     } = reqConfig;
-    const offset = limit * (page - 1);
+    const offset = getOffset(limit, page);
     const userRepository = getRepository(UserEntity);
 
     return await userRepository
@@ -29,30 +31,23 @@ class UsersService {
     return await userRepository.findOne({ id });
   }
 
-  public async addUser(userData: User): Promise<User> {
+  public async addUser(userData: Partial<User>): Promise<User> {
     const userRepository = getRepository(UserEntity);
-    const userConfig = {
-      ...userData,
-    };
-    const user = userRepository.create({ ...userConfig });
+    const userConfig = getConfig(userData);
+    const user = userRepository.create(userConfig);
     return await userRepository.save(user);
   }
 
-  public async updateUser(userData: User): Promise<User> {
+  public async updateUser(userData: Partial<User>): Promise<User> {
     const userRepository = getRepository(UserEntity);
-    await userRepository.update(userData.id, {
-      ...userData,
-    });
+    await userRepository.update(userData.id, getConfig(userData));
     return await this.getUser(userData.id);
   }
 
   public async removeUser(id: string): Promise<User> {
     const userConfig = await this.getUser(id);
     const userRepository = getRepository(UserEntity);
-    await userRepository.update(id, {
-      ...userConfig,
-      status: UserStatuses.DELETED,
-    });
+    await userRepository.update(id, getConfig({ ...userConfig, status: UserStatuses.DELETED }));
     return await this.getUser(id);
   }
 }
