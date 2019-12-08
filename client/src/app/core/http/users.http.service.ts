@@ -24,13 +24,13 @@ export class UsersHttpService {
 		);
 	}
 
-	public addUser(userData: User): Observable<User> {
+	public addUser(userData: Partial<User>): Observable<User> {
 		return this.http.post<User>(this.httpService.createApiUrl('users'), userData, this.httpService.httpOptions).pipe(
 			catchError(error => this.httpService.handleError(error)),
 		);
 	}
 
-	public updateUser(userData: User): Observable<User> {
+	public updateUser(userData: Partial<User>): Observable<User> {
 		return this.http.put<User>(this.httpService.createApiUrl(`users/${userData.id}`), userData, this.httpService.httpOptions).pipe(
 			catchError(error => this.httpService.handleError(error)),
 		);

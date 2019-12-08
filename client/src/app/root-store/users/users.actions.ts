@@ -38,11 +38,11 @@ export const loadUser = createAction(ActionTypes.LOAD_USER, props<{ payload: { u
 export const loadUserSucceeded = createAction(ActionTypes.LOAD_USER_SUCCEEDED, props<{ payload: { user: User } }>());
 export const loadUserFailed = createAction(ActionTypes.LOAD_USER_FAILED, props<{ payload: Error }>());
 
-export const addUser = createAction(ActionTypes.ADD_USER, props<{ payload: { userConfig: User } }>());
+export const addUser = createAction(ActionTypes.ADD_USER, props<{ payload: { userConfig: Partial<User> } }>());
 export const addUserSucceeded = createAction(ActionTypes.ADD_USER_SUCCEEDED, props<{ payload: { user: User } }>());
 export const addUserFailed = createAction(ActionTypes.ADD_USER_FAILED, props<{ payload: Error }>());
 
-export const updateUser = createAction(ActionTypes.UPDATE_USER, props<{ payload: { userConfig: User } }>());
+export const updateUser = createAction(ActionTypes.UPDATE_USER, props<{ payload: { userConfig: Partial<User> } }>());
 export const updateUserSucceeded = createAction(ActionTypes.UPDATE_USER_SUCCEEDED, props<{ payload: { user: User } }>());
 export const updateUserFailed = createAction(ActionTypes.UPDATE_USER_FAILED, props<{ payload: Error }>());
 

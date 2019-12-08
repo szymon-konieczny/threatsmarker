@@ -14,7 +14,9 @@ export const usersReducer = createReducer(
 	on(UsersActions.loadUsersFailed, (state, { payload }) => ({ ...state, isLoading: false, error: payload.message })),
 
 	on(UsersActions.loadUser, state => ({ ...state, isLoading: true, error: null })),
-	on(UsersActions.loadUserSucceeded, (state, { payload }) => ({ ...state, selectedUser: payload.user, isLoading: false, error: null })),
+	on(UsersActions.loadUserSucceeded, (state, { payload }) => ({
+		...adapter.upsertOne(payload.user, state), selectedUserId: payload.user.id, isLoading: false, error: null,
+	})),
 	on(UsersActions.loadUserFailed, (state, { payload }) => ({ ...state, isLoading: false, error: payload.message })),
 
 	on(UsersActions.addUser, state => ({ ...state, isLoading: true, error: null })),

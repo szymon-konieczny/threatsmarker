@@ -13,4 +13,3 @@ export const connectDatabase = async (): Promise<void> => {
     logger.logError({}, err);
   }
 };
-

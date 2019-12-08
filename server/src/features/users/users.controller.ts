@@ -5,8 +5,7 @@ import { usersService } from './users.service';
 class UsersController {
   public async getAll(req: Request, res: Response): Promise<void> {
     const data = await usersService.getUsers(req.query);
-    const count = data.length;
-    res.json({ data, count });
+    res.json(data);
   }
 
   public async getUser(req: Request, res: Response): Promise<void> {
