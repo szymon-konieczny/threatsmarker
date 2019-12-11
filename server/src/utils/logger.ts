@@ -14,16 +14,16 @@ export class Logger {
     this.logger = pino(pinoConfig);
   }
 
-  public logInfo(object: any, msg: string) {
-    this.logger.info(object, msg);
+  public logInfo(message: string, data?: object) {
+    this.logger.info(data, message);
   }
 
-  public logError(object: any, msg: string) {
-    this.logger.error(object, msg);
+  public logError(message: string, data?: object) {
+    this.logger.error(data, message);
   }
 
-  public logWarn(object: any, msg: string) {
-    this.logger.warn(object, msg);
+  public logWarn(message: string, data?: object) {
+    this.logger.warn(data, message);
   }
 
   public attachLoggingMiddleware(app: Express) {

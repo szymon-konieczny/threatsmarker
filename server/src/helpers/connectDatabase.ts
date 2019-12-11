@@ -1,15 +1,16 @@
 import { connect } from '../database';
 import { Logger } from '../utils';
+import { infoMessages } from 'src/constants';
 
 export const connectDatabase = async (): Promise<void> => {
   const logger = new Logger();
 
   try {
     const databaseConnection = await connect();
-    logger.logInfo({}, 'DB connection OK');
+    logger.logInfo(infoMessages.DatabaseConnectionOK);
     await databaseConnection.runMigrations();
-    logger.logInfo({}, 'Migrations OK');
+    logger.logInfo(infoMessages.migrationOK);
   } catch (err) {
-    logger.logError({}, err);
+    logger.logError(err);
   }
 };

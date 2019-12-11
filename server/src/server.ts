@@ -6,6 +6,7 @@ import router from './features';
 import { connectDatabase } from './helpers';
 import { env } from './config/env';
 import { Logger } from './utils';
+import { infoMessages } from './constants';
 
 export class Server {
   private app: Express;
@@ -37,12 +38,12 @@ export class Server {
     return new Promise(resolve => this.app.listen(port, resolve));
   }
 
-  public async initializeServer(port: number) {
+  public async initializeServer(port: number): Promise<void> {
     try {
       await this.listen(port);
-      this.logger.logInfo({}, `Server is listening at port ${port}`);
+      this.logger.logInfo(`${infoMessages.serverListeningAtPort} ${port}`);
     } catch (err) {
-      this.logger.logError({}, err);
+      this.logger.logError(err);
     }
   }
 };
