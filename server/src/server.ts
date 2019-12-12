@@ -5,9 +5,16 @@ import bodyParser from 'body-parser';
 import router from './features';
 import { connectDatabase } from './helpers';
 import { env } from './config/env';
+import { Logger } from './utils';
+import { infoMessages } from './constants';
 
 export class Server {
   private app: Express;
+  public logger: Logger;
+
+  constructor() {
+    this.logger = new Logger({});
+  }
 
   public async init() {
     this.app = express();
@@ -20,6 +27,7 @@ export class Server {
   private initializeMiddleware() {
     this.app.use(cors());
     this.app.use(bodyParser.json());
+    this.logger.attachLoggingMiddleware(this.app);
   }
 
   private initializeRouting() {
@@ -30,9 +38,12 @@ export class Server {
     return new Promise(resolve => this.app.listen(port, resolve));
   }
 
-  public initializeServer(port: number) {
-    this.listen(port)
-      .then(connection => { console.log('conn: ', connection); })
-      .catch((err) => { throw new Error(err); });
+  public async initializeServer(port: number): Promise<void> {
+    try {
+      await this.listen(port);
+      this.logger.logInfo(`${infoMessages.serverListeningAtPort} ${port}`);
+    } catch (err) {
+      this.logger.logError(err);
+    }
   }
 };

@@ -5,7 +5,7 @@ import { UserEntity } from "./users.entity";
 import { RequestListConfig, User, GetAllResponse } from "../../interfaces";
 import { DefaultRequestConfig, UserStatuses } from '../../constants';
 import { getConfig } from '../../helpers';
-import { getOffset } from 'src/helpers/getOffset';
+import { getOffset } from '../../helpers/getOffset';
 
 class UsersService {
   public async getUsers(reqConfig: RequestListConfig): Promise<GetAllResponse<UserEntity>> {
