@@ -30,7 +30,10 @@ export class Server {
     this.app.use(cors());
     this.app.use(bodyParser.json());
     this.logger.attachLoggingMiddleware(this.app);
-    this.sentryErrorService.getSentryErrorHandler(this.app);
+
+    if (env.isProduction) {
+      this.sentryErrorService.getSentryErrorHandler(this.app);
+    }
   }
 
   private initializeRouting(): void {
