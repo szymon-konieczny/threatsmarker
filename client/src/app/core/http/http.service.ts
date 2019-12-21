@@ -16,14 +16,6 @@ export class HttpService {
 		}),
 	};
 
-	public handleError(err: any, showNotification = true) {
-		if (showNotification) {
-			// TODO: Implement error handling + alert service
-		}
-
-		return throwError(err);
-	}
-
 	public createApiUrl(path: string, requestConfig?: RequestConfig): string {
 		const queryParamsString = requestConfig ? this.getQueryParams(requestConfig) : '';
 		return `${AppConfig.apiUrl}/${path}${queryParamsString}`;
