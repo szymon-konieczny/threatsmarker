@@ -1,7 +1,7 @@
 import { Injectable, ErrorHandler } from '@angular/core';
 import * as Sentry from '@sentry/browser';
 
-import * as env from '@env/environment.prod';
+import * as env from '@env/environment';
 
 Sentry.init({
 	dsn: env.AppConfig.sentryDsn,
@@ -11,7 +11,7 @@ Sentry.init({
 	providedIn: 'root'
 })
 export class SentryErrorHandlerService implements ErrorHandler {
-	handleError(error: any) {
+	public handleError(error: any) {
 		const eventId = Sentry.captureException(error.originalError || error);
 		Sentry.showReportDialog({ eventId });
 	}
