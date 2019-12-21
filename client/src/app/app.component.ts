@@ -11,7 +11,7 @@ import { User, RequestConfig } from '@interfaces';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-	private readonly userId = 'b9ae6f87-b082-4fe8-851e-b7ef98a34957';
+	private readonly userId = '56b964a0-a6a3-47c1-8fd4-b36ba43e4149';
 	private readonly mockedUserToAdd: Partial<User> = {
 		name: 'Szymon',
 		email: 'sz@mo.n',
