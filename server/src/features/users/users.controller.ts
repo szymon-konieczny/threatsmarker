@@ -25,7 +25,6 @@ class UsersController {
     try {
       const user = await usersService.addUser(req.body);
       res.json(user);
-      throw new Error('addUser error!!!!');
     } catch (err) {
       next(err);
     }
