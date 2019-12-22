@@ -1,9 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 
 import { UsersFacade } from './root-store/users/users.facade';
 import { User, RequestConfig } from '@interfaces';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 
 @Component({
 	selector: 'app-root',
@@ -11,7 +13,9 @@ import { User, RequestConfig } from '@interfaces';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-	private readonly userId = 'b9ae6f87-b082-4fe8-851e-b7ef98a34957';
+	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+	private readonly userId = '462da105-b32d-409f-a906-bea0e37c5ba6';
 	private readonly mockedUserToAdd: Partial<User> = {
 		name: 'Szymon',
 		email: 'sz@mo.n',
@@ -40,11 +44,19 @@ export class AppComponent implements OnInit, OnDestroy {
 	public users$: Observable<User[]>;
 	public destroy$ = new Subject<void>();
 
-	constructor(private usersFacade: UsersFacade) { }
+	public columnsToDisplay = ['name', 'email', 'status'];
+	public dataSource: MatTableDataSource<User>;
+
+	constructor(private usersFacade: UsersFacade, private fb: FormBuilder) { }
 
 	public ngOnInit() {
 		this.usersFacade.loadUsers({});
-		this.users$ = this.usersFacade.users$.pipe(takeUntil(this.destroy$));
+		this.usersFacade.users$.pipe(
+			takeUntil(this.destroy$),
+		).subscribe(users => {
+			this.dataSource = new MatTableDataSource<User>(users);
+			this.dataSource.paginator = this.paginator;
+		});
 	}
 
 	public ngOnDestroy() {
