@@ -1,11 +1,14 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import { UsersFacade } from './root-store/users/users.facade';
 import { User, RequestConfig } from '@interfaces';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+// import { AlertComponent } from '@core/alert/alert.component';
+import { AlertService } from '@core/alert/alert.service';
 
 @Component({
 	selector: 'app-root',
@@ -47,7 +50,16 @@ export class AppComponent implements OnInit, OnDestroy {
 	public columnsToDisplay = ['name', 'email', 'status'];
 	public dataSource: MatTableDataSource<User>;
 
-	constructor(private usersFacade: UsersFacade, private fb: FormBuilder) { }
+	constructor(
+		private usersFacade: UsersFacade,
+		private fb: FormBuilder,
+		private snackbar: MatSnackBar,
+		private alertService: AlertService,
+	) { }
+
+	public openSnackBar(message: string, action: string) {
+		this.alertService.openSnackBar(message, action);
+	}
 
 	public ngOnInit() {
 		this.usersFacade.loadUsers({});

@@ -8,5 +8,8 @@ import { AlertModule } from './alert/alert.module';
 		AlertModule,
 		HttpModule,
 	],
+	exports: [
+		AlertModule,
+	]
 })
 export class CoreModule { }

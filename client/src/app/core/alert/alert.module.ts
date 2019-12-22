@@ -1,10 +1,15 @@
 import { NgModule } from '@angular/core';
 
-import { AlertContainerComponent } from './alert-container/alert-container.component';
+import { AlertSnackBarComponent } from './alert-snackbar.component';
 import { AlertService } from './alert.service';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
-	declarations: [AlertContainerComponent],
+	imports: [SharedModule],
+	declarations: [AlertSnackBarComponent],
 	providers: [AlertService],
+	entryComponents: [
+		AlertSnackBarComponent,
+	]
 })
 export class AlertModule { }
