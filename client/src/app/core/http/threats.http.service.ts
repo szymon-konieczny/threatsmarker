@@ -5,7 +5,7 @@ import { catchError } from 'rxjs/operators';
 
 import { Threat, RequestConfig, GetAllResponse } from '@interfaces';
 import { HttpService } from './http.service';
-import { ErrorService } from '@core/error';
+import { ErrorHandlerInterceptor } from '@core/error';
 
 @Injectable({
 	providedIn: 'root'
@@ -13,37 +13,37 @@ import { ErrorService } from '@core/error';
 export class ThreatsHttpService {
 	constructor(
 		private httpService: HttpService,
-		private errorService: ErrorService,
+		private errorInterceptor: ErrorHandlerInterceptor,
 		private http: HttpClient,
 	) { }
 
 	public getThreats(requestConfig: RequestConfig): Observable<GetAllResponse<Threat>> {
 		return this.http.get<GetAllResponse<Threat>>(this.httpService.createApiUrl('threats', requestConfig), this.httpService.httpOptions).pipe(
-			catchError(error => this.errorService.handleError(error)),
+			catchError(error => this.errorInterceptor.handleError(error)),
 		);
 	}
 
 	public getThreat(threatId: string): Observable<Threat> {
 		return this.http.get<Threat>(this.httpService.createApiUrl(`threats/${threatId}`), this.httpService.httpOptions).pipe(
-			catchError(error => this.errorService.handleError(error)),
+			catchError(error => this.errorInterceptor.handleError(error)),
 		);
 	}
 
 	public addThreat(threatConfig: Threat): Observable<Threat> {
 		return this.http.post<Threat>(this.httpService.createApiUrl('threats'), threatConfig, this.httpService.httpOptions).pipe(
-			catchError(error => this.errorService.handleError(error)),
+			catchError(error => this.errorInterceptor.handleError(error)),
 		);
 	}
 
 	public updateThreat(threatConfig: Threat): Observable<Threat> {
 		return this.http.put<Threat>(this.httpService.createApiUrl(
 			`threats/${threatConfig.id}`), threatConfig, this.httpService.httpOptions
-		).pipe(catchError(error => this.errorService.handleError(error)));
+		).pipe(catchError(error => this.errorInterceptor.handleError(error)));
 	}
 
 	public removeThreat(threatId: string): Observable<Threat> {
 		return this.http.delete<Threat>(this.httpService.createApiUrl(`threats/${threatId}`), this.httpService.httpOptions).pipe(
-			catchError(error => this.errorService.handleError(error)),
+			catchError(error => this.errorInterceptor.handleError(error)),
 		);
 	}
 }

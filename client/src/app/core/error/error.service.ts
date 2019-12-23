@@ -16,7 +16,7 @@ import * as env from '@env/environment';
 @Injectable({
 	providedIn: 'root'
 })
-export class ErrorService implements HttpInterceptor {
+export class ErrorHandlerInterceptor implements HttpInterceptor {
 	constructor(private sentryErrorService: SentryErrorHandlerService) { }
 
 	public handleError(error: HttpErrorResponse): Observable<never> {
