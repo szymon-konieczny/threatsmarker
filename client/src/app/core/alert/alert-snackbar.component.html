@@ -1,3 +1,6 @@
-<div [ngClass]="{'error-alert': alertType === 'error'}">
-  {{ data?.message }}
+<div class="snackbar-wrapper">
+  <div class="alert" [ngClass]="{'error': alertType === 'error', 'info': alertType === 'info'}">
+    <div class="alert-text">{{ data?.message }}</div>
+    <button class="alert-button" (click)="snackBarRef.dismiss()">x</button>
+  </div>
 </div>

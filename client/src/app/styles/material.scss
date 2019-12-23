@@ -1,17 +1,2 @@
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-
-.mat-snack-bar-container {
-  margin: 0;
-  padding: 0;
-  height: 30px;
-  width: 60vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-snack-bar-container.error-alert {
-  color: red;
-  background: rgba(255,255, 255, .7);
-  border: 2px solid red;
-}
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import './snackbar.scss';

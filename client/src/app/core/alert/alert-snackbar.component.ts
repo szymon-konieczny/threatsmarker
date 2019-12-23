@@ -4,16 +4,17 @@ import { MAT_SNACK_BAR_DATA, MatSnackBarRef, MatSnackBarContainer, MatSnackBar, 
 import { Alert } from './alert.service';
 
 @Component({
-	templateUrl: 'alert-snackbar.component.html',
-	styles: ['./app.component.scss'],
-	encapsulation: ViewEncapsulation.None,
+	selector: 'app-snackbar',
+	templateUrl: './alert-snackbar.component.html',
+	styleUrls: ['./alert-snackbar.component.scss'],
 })
 export class AlertSnackBarComponent {
 	public alertType: string;
 
 	constructor(
+		public snackBarRef: MatSnackBarRef<AlertSnackBarComponent>,
 		@Inject(MAT_SNACK_BAR_DATA) public data: Alert,
 	) {
-		this.alertType = data.type === 'error' ? 'error' : 'info';
+		this.alertType = data.type === 'error' ? data.type : 'info';
 	}
 }

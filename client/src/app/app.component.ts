@@ -1,13 +1,10 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { UsersFacade } from './root-store/users/users.facade';
 import { User, RequestConfig } from '@interfaces';
-import { FormBuilder } from '@angular/forms';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { MatSnackBar } from '@angular/material/snack-bar';
-// import { AlertComponent } from '@core/alert/alert.component';
 import { AlertService } from '@core/alert/alert.service';
 
 @Component({
@@ -52,8 +49,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private usersFacade: UsersFacade,
-		private fb: FormBuilder,
-		private snackbar: MatSnackBar,
 		private alertService: AlertService,
 	) { }
 
@@ -95,5 +90,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
 	public onRemoveUser() {
 		this.usersFacade.removeUser(this.userId);
+	}
+
+	public onShowInfoAlert() {
+		this.alertService.openSnackBar('Some info alert', 'info');
+	}
+
+	public onShowErrorAlert() {
+		this.alertService.openSnackBar('Some error alert', 'error');
 	}
 }

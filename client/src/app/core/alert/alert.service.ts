@@ -20,10 +20,12 @@ export class AlertService {
 	public openSnackBar(message: string, type: string) {
 		const duration = 3000;
 		const verticalPosition = 'top';
+		const panelClass = 'custom-snackbar';
 
 		this.snackBar.openFromComponent(AlertSnackBarComponent, {
 			duration,
 			verticalPosition,
+			panelClass,
 			data: { message, type, },
 		});
 	}
