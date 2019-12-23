@@ -18,7 +18,6 @@ import { RootStoreModule } from './root-store/root-store.module';
 		RootStoreModule,
 		BrowserAnimationsModule,
 	],
-	providers: [],
 	bootstrap: [AppComponent],
 })
 export class AppModule { }
