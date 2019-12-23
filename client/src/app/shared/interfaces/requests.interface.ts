@@ -1,3 +1,5 @@
+import { HttpErrorResponse } from '@angular/common/http';
+
 export interface RequestConfig {
 	limit?: number;
 	page?: number;
@@ -6,7 +8,7 @@ export interface RequestConfig {
 	orderBy?: string;
 }
 
-export interface GetAllResponse<T> {
+export interface GetAllResponse<T> extends HttpErrorResponse {
 	data: T[];
 	count?: number;
 }
