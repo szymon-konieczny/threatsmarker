@@ -1,11 +1,19 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+<<<<<<< HEAD
+=======
 import { MatPaginator, MatTableDataSource } from '@angular/material';
+>>>>>>> develop
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 
 import { UsersFacade } from './root-store/users/users.facade';
 import { User, RequestConfig } from '@interfaces';
+<<<<<<< HEAD
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
+=======
 import { AlertService } from '@core/alert/alert.service';
+>>>>>>> develop
 
 @Component({
 	selector: 'app-root',
