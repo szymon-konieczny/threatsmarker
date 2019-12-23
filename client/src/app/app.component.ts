@@ -93,10 +93,10 @@ export class AppComponent implements OnInit, OnDestroy {
 	}
 
 	public onShowInfoAlert() {
-		this.alertService.openSnackBar('Some info alert', 'info');
+		this.openSnackBar('Some info alert', 'info');
 	}
 
 	public onShowErrorAlert() {
-		this.alertService.openSnackBar('Some error alert', 'error');
+		this.openSnackBar('Some error alert', 'error');
 	}
 }

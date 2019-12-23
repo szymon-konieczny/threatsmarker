@@ -8,10 +8,7 @@ import { SharedModule } from '@shared/shared.module';
 @NgModule({
 	imports: [SharedModule],
 	declarations: [AlertSnackBarComponent],
-	providers: [
-		AlertService,
-		{ provide: MAT_SNACK_BAR_DATA, useValue: {} },
-	],
+	providers: [AlertService],
 	entryComponents: [
 		AlertSnackBarComponent,
 	]
