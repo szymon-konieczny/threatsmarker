@@ -1,9 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 
 import { UsersFacade } from './root-store/users/users.facade';
 import { User, RequestConfig } from '@interfaces';
+import { AlertService } from '@core/alert/alert.service';
 
 @Component({
 	selector: 'app-root',
@@ -11,7 +13,9 @@ import { User, RequestConfig } from '@interfaces';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-	private readonly userId = '56b964a0-a6a3-47c1-8fd4-b36ba43e4149';
+	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+	private readonly userId = '462da105-b32d-409f-a906-bea0e37c5ba6';
 	private readonly mockedUserToAdd: Partial<User> = {
 		name: 'Szymon',
 		email: 'sz@mo.n',
@@ -40,11 +44,26 @@ export class AppComponent implements OnInit, OnDestroy {
 	public users$: Observable<User[]>;
 	public destroy$ = new Subject<void>();
 
-	constructor(private usersFacade: UsersFacade) { }
+	public columnsToDisplay = ['name', 'email', 'status'];
+	public dataSource: MatTableDataSource<User>;
+
+	constructor(
+		private usersFacade: UsersFacade,
+		private alertService: AlertService,
+	) { }
+
+	public openSnackBar(message: string, action: string) {
+		this.alertService.openSnackBar(message, action);
+	}
 
 	public ngOnInit() {
 		this.usersFacade.loadUsers({});
-		this.users$ = this.usersFacade.users$.pipe(takeUntil(this.destroy$));
+		this.usersFacade.users$.pipe(
+			takeUntil(this.destroy$),
+		).subscribe(users => {
+			this.dataSource = new MatTableDataSource<User>(users);
+			this.dataSource.paginator = this.paginator;
+		});
 	}
 
 	public ngOnDestroy() {
@@ -71,5 +90,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
 	public onRemoveUser() {
 		this.usersFacade.removeUser(this.userId);
+	}
+
+	public onShowInfoAlert() {
+		this.openSnackBar('Some info alert', 'info');
+	}
+
+	public onShowErrorAlert() {
+		this.openSnackBar('Some error alert', 'error');
 	}
 }
