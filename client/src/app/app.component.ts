@@ -1,11 +1,19 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+<<<<<<< HEAD
+=======
+import { MatPaginator, MatTableDataSource } from '@angular/material';
+>>>>>>> develop
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 
 import { UsersFacade } from './root-store/users/users.facade';
 import { User, RequestConfig } from '@interfaces';
+<<<<<<< HEAD
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
+=======
+import { AlertService } from '@core/alert/alert.service';
+>>>>>>> develop
 
 @Component({
 	selector: 'app-root',
@@ -47,7 +55,14 @@ export class AppComponent implements OnInit, OnDestroy {
 	public columnsToDisplay = ['name', 'email', 'status'];
 	public dataSource: MatTableDataSource<User>;
 
-	constructor(private usersFacade: UsersFacade, private fb: FormBuilder) { }
+	constructor(
+		private usersFacade: UsersFacade,
+		private alertService: AlertService,
+	) { }
+
+	public openSnackBar(message: string, action: string) {
+		this.alertService.openSnackBar(message, action);
+	}
 
 	public ngOnInit() {
 		this.usersFacade.loadUsers({});
@@ -83,5 +98,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
 	public onRemoveUser() {
 		this.usersFacade.removeUser(this.userId);
+	}
+
+	public onShowInfoAlert() {
+		this.openSnackBar('Some info alert', 'info');
+	}
+
+	public onShowErrorAlert() {
+		this.openSnackBar('Some error alert', 'error');
 	}
 }

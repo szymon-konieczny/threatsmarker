@@ -1,8 +1,15 @@
 import { NgModule } from '@angular/core';
 
 import { HttpModule } from './http/http.module';
+import { AlertModule } from './alert/alert.module';
 
 @NgModule({
-	imports: [HttpModule],
+	imports: [
+		AlertModule,
+		HttpModule,
+	],
+	exports: [
+		AlertModule,
+	]
 })
 export class CoreModule { }
