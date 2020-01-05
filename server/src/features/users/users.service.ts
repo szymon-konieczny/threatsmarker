@@ -5,6 +5,7 @@ import { UserEntity } from "./users.entity";
 import { RequestListConfig, User, GetAllResponse } from "../../interfaces";
 import { DefaultRequestConfig, UserStatuses } from '../../constants';
 import { getConfig, getOffset } from '../../helpers';
+import { authService } from '../auth/auth.service';
 
 class UsersService {
   public async getUsers(reqConfig: RequestListConfig): Promise<GetAllResponse<UserEntity>> {
@@ -35,7 +36,14 @@ class UsersService {
   public async registerUser(userData: Partial<User>): Promise<User> {
     const userRepository = getRepository(UserEntity);
     const userConfig = getConfig(userData);
-    const user = userRepository.create(userConfig);
+    const hashedPassword = await authService.hashPassword(userData.password);
+
+    const userConfigWithHashedPassword = {
+      ...userConfig,
+      password: hashedPassword,
+    }
+
+    const user = userRepository.create(userConfigWithHashedPassword);
     return await userRepository.save(user);
   }
 

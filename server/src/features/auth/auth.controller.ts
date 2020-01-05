@@ -20,7 +20,7 @@ class AuthController {
       return next({ error: 'User already exists!' });
     }
 
-    const hashedPassword = this.bcrypt.hashPassword(userData.password);
+    const hashedPassword = await authService.hashPassword(userData.password);
 
     const userConfig = {
       ...userData,
