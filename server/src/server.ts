@@ -2,7 +2,7 @@ import express, { Express } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
-import router from './features';
+import { router } from './features';
 import { connectDatabase } from './helpers';
 import { env } from './config/env';
 import { Logger, SentryErrorHandler } from './utils';

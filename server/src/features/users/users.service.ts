@@ -4,8 +4,7 @@ import { Container } from 'typedi';
 import { UserEntity } from "./users.entity";
 import { RequestListConfig, User, GetAllResponse } from "../../interfaces";
 import { DefaultRequestConfig, UserStatuses } from '../../constants';
-import { getConfig } from '../../helpers';
-import { getOffset } from '../../helpers/getOffset';
+import { getConfig, getOffset } from '../../helpers';
 
 class UsersService {
   public async getUsers(reqConfig: RequestListConfig): Promise<GetAllResponse<UserEntity>> {
@@ -33,7 +32,7 @@ class UsersService {
     return await userRepository.findOne({ id });
   }
 
-  public async addUser(userData: Partial<User>): Promise<User> {
+  public async registerUser(userData: Partial<User>): Promise<User> {
     const userRepository = getRepository(UserEntity);
     const userConfig = getConfig(userData);
     const user = userRepository.create(userConfig);
@@ -51,6 +50,12 @@ class UsersService {
     const userRepository = getRepository(UserEntity);
     await userRepository.update(id, getConfig({ ...userConfig, status: UserStatuses.DELETED }));
     return await this.getUser(id);
+  }
+
+  public async getUserByEmail(email: string): Promise<User> {
+    const userRepository = getRepository(UserEntity);
+    const user = await userRepository.findOne({ email });
+    return user;
   }
 }
 

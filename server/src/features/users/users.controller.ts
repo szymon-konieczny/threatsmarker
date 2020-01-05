@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 import { usersService } from './users.service';
+import { authService } from '../auth/auth.service';
 
 class UsersController {
   public async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -21,10 +22,18 @@ class UsersController {
     }
   }
 
-  public async addUser(req: Request, res: Response, next: NextFunction): Promise<void> {
+  public async registerUser(req: Request, res: Response, next: NextFunction): Promise<void> {
+    const userData = req.body;
+
     try {
-      const user = await usersService.addUser(req.body);
-      res.json(user);
+      const isDuplicate = await usersService.getUserByEmail(userData.email);
+
+      if (isDuplicate) {
+        throw new Error('User already exists');
+      }
+
+      const user = await usersService.registerUser(userData);
+      res.status(201).json(user);
     } catch (err) {
       next(err);
     }
