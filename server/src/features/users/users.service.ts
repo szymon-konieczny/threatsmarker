@@ -1,8 +1,8 @@
 import { getRepository } from 'typeorm';
 import { Container } from 'typedi';
 
-import { UserEntity } from "./users.entity";
-import { RequestListConfig, User, GetAllResponse } from "../../interfaces";
+import { UserEntity } from './users.entity';
+import { RequestListConfig, User, GetAllResponse } from '../../interfaces';
 import { DefaultRequestConfig, UserStatuses } from '../../constants';
 import { getConfig, getOffset } from '../../helpers';
 import { authService } from '../auth/auth.service';
