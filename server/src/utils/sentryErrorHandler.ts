@@ -1,5 +1,6 @@
 import { Express } from 'express';
 import * as Sentry from '@sentry/node';
+
 import { env } from '../config/env';
 
 Sentry.init({ dsn: env.SENTRY_DSN });

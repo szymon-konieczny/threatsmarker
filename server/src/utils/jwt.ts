@@ -1,12 +1,13 @@
 import * as jwt from 'jsonwebtoken';
-import { env } from 'src/config/env';
+
+import { env } from '../config/env';
 
 export class Jwt {
-  public sign(userId: string): string {
-    return jwt.sign({ userId }, env.SECRET_KEY);
+  public sign(config: any): string {
+    return jwt.sign(config, env.SECRET_KEY);
   }
 
-  public verify(token: string) {
+  public verify(token: string): string | object {
     return jwt.verify(token, env.SECRET_KEY);
   }
 }

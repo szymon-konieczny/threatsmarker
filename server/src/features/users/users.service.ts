@@ -4,8 +4,7 @@ import { Container } from 'typedi';
 import { UserEntity } from './users.entity';
 import { RequestListConfig, User, GetAllResponse } from '../../interfaces';
 import { DefaultRequestConfig, UserStatuses } from '../../constants';
-import { getConfig, getOffset } from '../../helpers';
-import { authService } from '../auth/auth.service';
+import { getUpdatedConfig, getOffset } from '../../helpers';
 
 class UsersService {
   public async getUsers(reqConfig: RequestListConfig): Promise<GetAllResponse<UserEntity>> {
@@ -33,30 +32,22 @@ class UsersService {
     return await userRepository.findOne({ id });
   }
 
-  public async registerUser(userData: Partial<User>): Promise<User> {
+  public async createUser(userData: Partial<User>): Promise<User> {
     const userRepository = getRepository(UserEntity);
-    const userConfig = getConfig(userData);
-    const hashedPassword = await authService.hashPassword(userData.password);
-
-    const userConfigWithHashedPassword = {
-      ...userConfig,
-      password: hashedPassword,
-    }
-
-    const user = userRepository.create(userConfigWithHashedPassword);
+    const user = userRepository.create(userData);
     return await userRepository.save(user);
   }
 
   public async updateUser(userData: Partial<User>): Promise<User> {
     const userRepository = getRepository(UserEntity);
-    await userRepository.update(userData.id, getConfig(userData));
+    await userRepository.update(userData.id, userData);
     return await this.getUser(userData.id);
   }
 
   public async removeUser(id: string): Promise<User> {
     const userConfig = await this.getUser(id);
     const userRepository = getRepository(UserEntity);
-    await userRepository.update(id, getConfig({ ...userConfig, status: UserStatuses.DELETED }));
+    await userRepository.update(id, getUpdatedConfig(userConfig, { status: UserStatuses.DELETED }));
     return await this.getUser(id);
   }
 

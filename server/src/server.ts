@@ -1,6 +1,7 @@
 import express, { Express } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 
 import { router } from './features';
 import { connectDatabase } from './helpers';
@@ -29,6 +30,7 @@ export class Server {
   private initializeMiddleware(): void {
     this.app.use(cors());
     this.app.use(bodyParser.json());
+    this.app.use(cookieParser());
     this.logger.attachLoggingMiddleware(this.app);
 
     if (env.isProduction) {

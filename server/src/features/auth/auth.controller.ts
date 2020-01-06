@@ -4,56 +4,45 @@ import { usersService } from '../users/users.service';
 import { authService } from './auth.service';
 import { Bcrypt } from '../../utils';
 
+const cookieWithTokenName = 'Token';
 class AuthController {
-  public bcrypt: Bcrypt;
+  public bcrypt = new Bcrypt();
 
-  constructor() {
-    this.bcrypt = new Bcrypt();
-  }
-
-  public async register(req: Request, res: Response, next: NextFunction) {
+  public async register(req: Request, res: Response, next: NextFunction): Promise<void> {
     const userData = req.body;
 
-    const user = await usersService.getUserByEmail(userData.email);
+    try {
+      const token = await authService.generateAuthToken({ id: userData.id });
+      const userConfig = await authService.getNewUserConfig(userData);
+      const user = await usersService.createUser(userConfig);
 
-    if (user) {
-      return next({ error: 'User already exists!' });
+      authService.setCookie(res, cookieWithTokenName, token);
+      res.status(201).json(user);
+    } catch (err) {
+      next(err);
     }
-
-    const hashedPassword = await authService.hashPassword(userData.password);
-
-    const userConfig = {
-      ...userData,
-      password: hashedPassword,
-    }
-
-    const token = await authService.generateAuthToken(userData.id);
-
-    await usersService.registerUser(userConfig);
-
-    // TODO: Check if token needs to be send that way
-    res.json({ user, token });
   }
 
-  public async login(req: Request, res: Response, next: NextFunction) {
+  public async login(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { email, password } = req.body;
 
       const user = await usersService.getUserByEmail(email);
-      const arePasswordsMatching = await this.bcrypt.comparePasswords(password, user.password);
 
       if (!user) {
         return next({ error: 'Login failed! Check authentication credentials' });
       }
 
+      const arePasswordsMatching = await this.bcrypt.comparePasswords(password, user.password);
+
       if (!arePasswordsMatching) {
         return next({ error: 'Login failed! Wrong password' });
       }
 
-      const token = await authService.generateAuthToken(user.id);
+      const token = await authService.generateAuthToken({ id: user.id });
 
-      // TODO: Check if token needs to be send that way
-      res.json({ user, token });
+      authService.setCookie(res, cookieWithTokenName, token);
+      res.json(user);
     } catch (error) {
       next(error);
     }

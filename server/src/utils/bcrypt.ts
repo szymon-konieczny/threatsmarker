@@ -1,5 +1,6 @@
 import * as bcrypt from 'bcrypt';
-import { env } from 'src/config/env';
+
+import { env } from '../config/env';
 
 export class Bcrypt {
   public async hashPassword(password: string): Promise<string> {
