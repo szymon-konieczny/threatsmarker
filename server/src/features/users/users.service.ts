@@ -1,12 +1,13 @@
 import { getRepository } from 'typeorm';
-import { Container } from 'typedi';
+import { Service } from 'typedi';
 
 import { UserEntity } from './users.entity';
 import { RequestListConfig, User, GetAllResponse } from '../../interfaces';
 import { DefaultRequestConfig, UserStatuses } from '../../constants';
 import { getUpdatedConfig, getOffset } from '../../helpers';
 
-class UsersService {
+@Service()
+export class UsersService {
   public async getUsers(reqConfig: RequestListConfig): Promise<GetAllResponse<UserEntity>> {
     const {
       page = DefaultRequestConfig.PAGE_NO,
@@ -57,5 +58,3 @@ class UsersService {
     return user;
   }
 }
-
-export const usersService = Container.get(UsersService);

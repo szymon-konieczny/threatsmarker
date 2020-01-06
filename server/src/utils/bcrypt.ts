@@ -1,7 +1,9 @@
 import * as bcrypt from 'bcrypt';
+import { Service } from 'typedi';
 
 import { env } from '../config/env';
 
+@Service()
 export class Bcrypt {
   public async hashPassword(password: string): Promise<string> {
     try {

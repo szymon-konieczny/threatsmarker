@@ -1,10 +1,21 @@
 import { Router } from 'express';
-import { usersRouter } from './users';
-import { authRouter } from './auth';
+import { UsersRouter } from './users/users.router';
+import { AuthRouter } from './auth/auth.router';
+import { Service } from 'typedi';
 
-const router = Router();
+@Service()
+export class AppRouter {
+  constructor(
+    private readonly usersRouter: UsersRouter,
+    private readonly authRouter: AuthRouter,
+  ) { }
 
-router.use('/users', usersRouter);
-router.use('/auth', authRouter);
+  public initRouter() {
+    const router = Router();
 
-export { router };
+    router.use('/users', this.usersRouter.initUsersRouter());
+    router.use('/auth', this.authRouter.initAuthRouter());
+
+    return router;
+  }
+}

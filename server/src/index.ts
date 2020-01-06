@@ -1,10 +1,18 @@
 import 'reflect-metadata';
-
 import dotenv from 'dotenv';
+import Container, { Service } from 'typedi';
 
 import { Server } from './server';
 
-dotenv.config();
+@Service()
+export class App {
+  constructor(private readonly server: Server) { }
 
-const server = new Server();
-server.init();
+  public init() {
+    dotenv.config();
+    this.server.init();
+  }
+}
+
+const app = Container.get(App);
+app.init();
