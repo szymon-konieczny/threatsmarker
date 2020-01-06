@@ -17,14 +17,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
 	private readonly userId = 'b3c6ad6d-b3a3-4a16-9787-a61f64e3b625';
 	private readonly mockedUserToAdd: Partial<User> = {
-		name: 'Andrzej',
-		email: 'andmrd@mo.n',
+		name: 'Aalia',
+		email: 'aalia12@mo.n',
 		googleId: '',
 		facebookId: '',
 		userInfo: 'Some user info',
 		profilePictureUrl: 'asaddsdsd',
-		password: '12@daM123',
-		role: 'admin',
+		password: 'asd12@daM123',
+		role: 'user',
 		status: 'active',
 	};
 

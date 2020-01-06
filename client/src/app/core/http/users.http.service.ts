@@ -29,8 +29,9 @@ export class UsersHttpService {
 		);
 	}
 
+	// It will be a part of the auth requests service in the future
 	public addUser(userData: Partial<User>): Observable<User> {
-		return this.http.post<User>(this.httpService.createApiUrl('users'), userData, this.httpService.httpOptions).pipe(
+		return this.http.post<User>(this.httpService.createApiUrl('auth/register'), userData, this.httpService.httpOptions).pipe(
 			catchError(error => this.errorInterceptor.handleError(error)),
 		);
 	}
