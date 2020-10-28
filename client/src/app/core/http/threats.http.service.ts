@@ -8,7 +8,7 @@ import { HttpService } from './http.service';
 import { ErrorHandlerInterceptor } from '@core/error';
 
 @Injectable({
-	providedIn: 'root'
+	providedIn: 'root',
 })
 export class ThreatsHttpService {
 	constructor(

@@ -15,10 +15,11 @@ import { AlertService } from '@core/alert/alert.service';
 export class AppComponent implements OnInit, OnDestroy {
 	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-	private readonly userId = 'b3c6ad6d-b3a3-4a16-9787-a61f64e3b625';
+  private readonly userId = 'b3c6ad6d-b3a3-4a16-9787-a61f64e3b632';
+
 	private readonly mockedUserToAdd: Partial<User> = {
-		name: 'Aalia',
-		email: 'aalia12@mo.n',
+		name: 'Roman',
+		email: 'rom@a.an',
 		googleId: '',
 		facebookId: '',
 		userInfo: 'Some user info',

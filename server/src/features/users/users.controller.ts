@@ -7,39 +7,27 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
 
-  public async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
-    try {
-      const data = await this.usersService.getUsers(req.query);
-      res.json(data);
-    } catch (err) {
-      next(err);
-    }
+  public getAll(req: Request, res: Response, next: NextFunction): void {
+    this.usersService.getUsers(req.query)
+      .then(data => res.json(data))
+      .catch(next);
   }
 
-  public async getUser(req: Request, res: Response, next: NextFunction): Promise<void> {
-    try {
-      const user = await this.usersService.getUser(req.params.id);
-      res.json(user);
-    } catch (err) {
-      next(err);
-    }
+  public getUser(req: Request, res: Response, next: NextFunction): void {
+    this.usersService.getUser(req.params.id)
+      .then(user => res.json(user))
+      .catch(next);
   }
 
-  public async updateUser(req: Request, res: Response, next: NextFunction): Promise<void> {
-    try {
-      const user = await this.usersService.updateUser(req.body);
-      res.json(user);
-    } catch (err) {
-      next(err);
-    }
+  public updateUser(req: Request, res: Response, next: NextFunction): void {
+    this.usersService.updateUser(req.body)
+      .then(user => res.json(user))
+      .catch(next);
   }
 
-  public async removeUser(req: Request, res: Response, next: NextFunction): Promise<void> {
-    try {
-      const user = await this.usersService.removeUser(req.params.id);
-      res.json(user);
-    } catch (err) {
-      next(err);
-    }
+  public removeUser(req: Request, res: Response, next: NextFunction): void {
+    this.usersService.removeUser(req.params.id)
+      .then(user => res.json(user))
+      .catch(next);
   }
 }

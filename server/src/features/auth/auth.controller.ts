@@ -19,7 +19,7 @@ export class AuthController {
     const userData = req.body;
 
     try {
-      const token = await this.authService.generateAuthToken({ id: userData.id });
+      const token = this.authService.generateAuthToken({ id: userData.id });
       const userConfig = await this.authService.getNewUserConfig(userData);
       const user = await this.usersService.createUser(userConfig);
 
