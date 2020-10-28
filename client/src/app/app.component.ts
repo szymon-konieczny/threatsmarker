@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import { UsersFacade } from './root-store/users/users.facade';
 import { User, RequestConfig } from '@interfaces';
@@ -15,23 +15,24 @@ import { AlertService } from '@core/alert/alert.service';
 export class AppComponent implements OnInit, OnDestroy {
 	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-	private readonly userId = '462da105-b32d-409f-a906-bea0e37c5ba6';
+  private readonly userId = 'b3c6ad6d-b3a3-4a16-9787-a61f64e3b632';
+
 	private readonly mockedUserToAdd: Partial<User> = {
-		name: 'Szymon',
-		email: 'sz@mo.n',
+		name: 'Roman',
+		email: 'rom@a.an',
 		googleId: '',
 		facebookId: '',
 		userInfo: 'Some user info',
 		profilePictureUrl: 'asaddsdsd',
-		password: '1234asdf',
-		role: 'admin',
+		password: 'asd12@daM123',
+		role: 'user',
 		status: 'active',
 	};
 
 	private readonly mockedUserToUpdate: User = {
 		id: this.userId,
 		name: 'Mariusz',
-		email: 'rob@12.as',
+		email: 'rob90@hjk.as',
 		googleId: '',
 		facebookId: '',
 		userInfo: 'Updated user info...',

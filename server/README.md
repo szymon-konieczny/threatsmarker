@@ -9,3 +9,5 @@ Before running the development server, type `npm install` to install the require
 ### Development
 
 To develop the application, type `npm run dev` or `yarn dev`.
+
+Node.js version: v10.22.1 

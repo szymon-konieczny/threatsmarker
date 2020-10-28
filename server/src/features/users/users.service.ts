@@ -1,13 +1,13 @@
 import { getRepository } from 'typeorm';
-import { Container } from 'typedi';
+import { Service } from 'typedi';
 
-import { UserEntity } from "./users.entity";
-import { RequestListConfig, User, GetAllResponse } from "../../interfaces";
+import { UserEntity } from './users.entity';
+import { RequestListConfig, User, GetAllResponse } from '../../interfaces';
 import { DefaultRequestConfig, UserStatuses } from '../../constants';
-import { getConfig } from '../../helpers';
-import { getOffset } from '../../helpers/getOffset';
+import { getUpdatedConfig, getOffset } from '../../helpers';
 
-class UsersService {
+@Service()
+export class UsersService {
   public async getUsers(reqConfig: RequestListConfig): Promise<GetAllResponse<UserEntity>> {
     const {
       page = DefaultRequestConfig.PAGE_NO,
@@ -33,25 +33,28 @@ class UsersService {
     return await userRepository.findOne({ id });
   }
 
-  public async addUser(userData: Partial<User>): Promise<User> {
+  public async createUser(userData: Partial<User>): Promise<User> {
     const userRepository = getRepository(UserEntity);
-    const userConfig = getConfig(userData);
-    const user = userRepository.create(userConfig);
+    const user = userRepository.create(userData);
     return await userRepository.save(user);
   }
 
   public async updateUser(userData: Partial<User>): Promise<User> {
     const userRepository = getRepository(UserEntity);
-    await userRepository.update(userData.id, getConfig(userData));
+    await userRepository.update(userData.id, userData);
     return await this.getUser(userData.id);
   }
 
   public async removeUser(id: string): Promise<User> {
     const userConfig = await this.getUser(id);
     const userRepository = getRepository(UserEntity);
-    await userRepository.update(id, getConfig({ ...userConfig, status: UserStatuses.DELETED }));
+    await userRepository.update(id, getUpdatedConfig(userConfig, { status: UserStatuses.DELETED }));
     return await this.getUser(id);
   }
-}
 
-export const usersService = Container.get(UsersService);
+  public async getUserByEmail(email: string): Promise<User> {
+    const userRepository = getRepository(UserEntity);
+    const user = await userRepository.findOne({ email });
+    return user;
+  }
+}

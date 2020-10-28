@@ -1,2 +1,3 @@
 export * from './connectDatabase';
-export * from './getConfig';
+export * from './getUpdatedConfig';
+export * from './getOffset';

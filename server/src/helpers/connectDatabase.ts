@@ -1,6 +1,6 @@
 import { connect } from '../database';
 import { Logger } from '../utils';
-import { infoMessages } from 'src/constants';
+import { infoMessages } from '../constants';
 
 export const connectDatabase = async (): Promise<void> => {
   const logger = new Logger();
