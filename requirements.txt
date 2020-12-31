@@ -1,0 +1,16 @@
+appdirs==1.4.4
+asgiref==3.2.10
+certifi==2020.6.20
+distlib==0.3.1
+Django==3.1.2
+djangorestframework==3.11.0
+djangorestframework-simplejwt==4.4.0
+filelock==3.0.12
+include==0.2.2
+pipenv==2020.8.13
+PyJWT==1.7.1
+pytz==2020.1
+six==1.15.0
+sqlparse==0.4.1
+virtualenv==20.1.0
+virtualenv-clone==0.5.4
