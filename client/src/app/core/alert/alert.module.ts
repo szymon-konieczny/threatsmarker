@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MAT_SNACK_BAR_DATA } from '@angular/material';
+import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 
 import { AlertSnackBarComponent } from './alert-snackbar.component';
 import { AlertService } from './alert.service';

@@ -1,5 +1,5 @@
 import { Component, Inject, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
-import { MAT_SNACK_BAR_DATA, MatSnackBarRef, MatSnackBarContainer, MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { MAT_SNACK_BAR_DATA, MatSnackBarRef, MatSnackBarContainer, MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 import { Alert } from './alert.service';
 
