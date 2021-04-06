@@ -18,14 +18,14 @@ export class UsersService {
     const offset = getOffset(limit, page);
     const userRepository = getRepository(UserEntity);
 
-    const data = await userRepository
+    const [data, count] = await userRepository
       .createQueryBuilder('user')
       .orderBy(orderBy, sortDirection)
       .skip(offset)
       .take(limit)
       .getManyAndCount();
 
-    return { data: data[0], count: data[1] }
+    return { data, count }
   }
 
   public async getUser(id: string): Promise<User> {
@@ -54,7 +54,6 @@ export class UsersService {
 
   public async getUserByEmail(email: string): Promise<User> {
     const userRepository = getRepository(UserEntity);
-    const user = await userRepository.findOne({ email });
-    return user;
+    return await userRepository.findOne({ email });
   }
 }

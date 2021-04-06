@@ -9,7 +9,7 @@ export const usersReducer = createReducer(
 	on(UsersActions.loadUsers, state => ({ ...state, isLoading: true, error: null })),
 	on(
 		UsersActions.loadUsersSucceeded,
-		(state, { payload }) => ({ ...adapter.addAll(payload.data, state), count: payload.count || null, isLoading: false, error: null }),
+		(state, { payload }) => ({ ...adapter.setAll(payload.data, state), count: payload.count || null, isLoading: false, error: null }),
 	),
 	on(UsersActions.loadUsersFailed, (state, { payload }) => ({ ...state, isLoading: false, error: payload.message })),
 
@@ -32,5 +32,5 @@ export const usersReducer = createReducer(
 
 	on(UsersActions.removeUser, state => ({ ...state, isLoading: true, error: null })),
 	on(UsersActions.removeUserSucceeded, (state, { payload }) => ({ ...adapter.removeOne(payload.user.id, state), })),
-	on(UsersActions.updateUserFailed, (state, { payload }) => ({ ...state, isLoading: false, error: payload.message })),
+	on(UsersActions.removeUserFailed, (state, { payload }) => ({ ...state, isLoading: false, error: payload.message })),
 );
